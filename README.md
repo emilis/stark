@@ -1,0 +1,3 @@
+#   Stark - a MPC web factory
+
+May we introduce you to Stark. Oh and by the way – good luck...
