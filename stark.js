@@ -22,6 +22,7 @@ module.exports = {
 function compileCss( src, dest ){
 
     var components =    mpc.parseFile( src, {
+        all:            true,
         recursive:      true,
         parts:          [ "css", "less" ],
     });
@@ -33,13 +34,15 @@ function compileCss( src, dest ){
 
 function compileJs( src, dest ){
 
+    var prefix =        ";" + JSNAMESPACE + "={};\n";
     var content =       mpc.parseFile( src, {
+        all:            true,
         recursive:      true,
         sort:           true,
         parts:          [ "js" ],
     }).map( getJsModule ).join( "\n" );
 
-    return fs.writeFileSync( dest, content );
+    return fs.writeFileSync( dest, prefix + content );
 }///
 
 
@@ -128,5 +131,6 @@ function fetchEjs( component ){
 
 function debugObj( obj ){
 
-    console.log( Object.getOwnPropertyNames( obj ));
+    console.log( obj && obj.name, Object.getOwnPropertyNames( obj ));
+    return obj;
 }///
