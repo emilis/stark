@@ -6,6 +6,8 @@ var less =              require( "less" );
 var mpc =               require( "mpc" );
 var modularity =        require( "mpc/modularity" );
 
+var jsCompiler =        require( "./compilers/js" );
+
 /// Constants ------------------------------------------------------------------
 
 var JSNAMESPACE =       "window.Modules";
@@ -44,15 +46,14 @@ function compileCss( src, dest ){
 
 function compileJs( src, dest ){
 
-    var prefix =        ";" + JSNAMESPACE + "={};\n";
-    var content =       mpc.parseFile( src, {
-        all:            true,
-        recursive:      true,
-        sort:           true,
-        parts:          [ "js" ],
-    }).map( getJsModule ).join( "\n" );
+    var components = mpc.parseFile( src, {
+        all:        true,
+        recursive:  true,
+        sort:       true,
+        parts:      [ "js" ],
+    });
 
-    return fs.writeFileSync( dest, prefix + content );
+    return fs.writeFileSync( dest, jsCompiler.compile( components ));
 }///
 
 
@@ -66,10 +67,6 @@ function compileEjs( src, dest ){
 
 /// Private functions ----------------------------------------------------------
 
-function keys( o ){
-    return o && Object.getOwnPropertyNames( o ) || [];
-}///
-
 function getPartContent( parts ){
     return function( component ){
 
@@ -82,46 +79,6 @@ function getPartContent( parts ){
     };//
 }///
 
-
-function getJsModule( component ){
-
-    var exports =       modularity.getExports( component );
-    var requirements =  modularity.getRequirements( component );
-    var content =       mpc.getPartContent( component, "js" );
-
-    var code =          [];
-    var sep =           "";
-
-    if ( content ){
-        
-        code.push(
-            ";\n(function(",
-            keys( requirements ).join( "," ),
-            "){\n" );
-        
-        code.push( content, ";\n" );
-
-        code.push( JSNAMESPACE, '["', component.name, '"] = {', "\n" );
-        
-        sep =           "";
-        for ( var k in exports ){
-            code.push( sep, k, ": ", exports[k] );
-            sep =       ",\n";
-        }
-        code.push( "\n};\n" );
-
-        /// Imports:
-        code.push( '})( ' );
-        sep =           "";
-        for ( var k in requirements ){
-            code.push( sep, JSNAMESPACE, '["', requirements[k], '"]' );
-            sep =       ", ";
-        }
-        code.push( " );\n" );
-    }
-    
-    return code.join( "" );
-}///
 
 
 function fetchEjs( component ){
