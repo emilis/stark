@@ -2,6 +2,7 @@
 
 var ejs =               require( "ejs" );
 var fs =                require( "fs" );
+var less =              require( "less" );
 var mpc =               require( "mpc" );
 var modularity =        require( "mpc/modularity" );
 
@@ -28,7 +29,16 @@ function compileCss( src, dest ){
     });
     var content =       components.map( getPartContent([ "css", "less" ])).join( "\n" );
 
-    return fs.writeFileSync( dest, content );
+    return less.render( content, onCss );
+
+    function onCss( e, css ){
+
+        if ( e ){
+            console.error( "stark.compileCss error:", e );
+        } else {
+            fs.writeFile( dest, css );
+        }
+    }
 }///
 
 

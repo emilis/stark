@@ -1,31 +1,32 @@
 {
-    "private":      true,
-    "name":         "stark",
-    "version":      "0.0.1",
-    "description":  "Stark - a mpc web factory",
-    "homepage":     "https://github.com/emilis/stark",
-    "author": {
-        "name":     "Emilis Dambauskas",
-        "email":    "emilis.d@gmail.com"
-    },
-    "bugs": {
-        "url":      "https://github.com/emilis/stark/issues"
-    },
-    "repository": {
-        "type":     "git",
-        "url":      "https://github.com/emilis/stark.git"
-    },
-    "bin": {
-        "mpc":      "./bin/stark"
-    },
-    "main":         "./stark.js",
-    "licenses": {
-        "type":     "GPL3",
-        "url":      "https://github.com/emilis/stark/blob/master/LICENSE.txt"
-    },
-    "dependencies": {
-        "mpc":      "0.0.x",
-        "ejs":      "1.x",
-        "yargs":    "1.2.x"
-    }
+  "private": true,
+  "name": "stark",
+  "version": "0.0.1",
+  "description": "Stark - a mpc web factory",
+  "homepage": "https://github.com/emilis/stark",
+  "author": {
+    "name": "Emilis Dambauskas",
+    "email": "emilis.d@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/emilis/stark/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emilis/stark.git"
+  },
+  "bin": {
+    "mpc": "./bin/stark"
+  },
+  "main": "./stark.js",
+  "licenses": {
+    "type": "GPL3",
+    "url": "https://github.com/emilis/stark/blob/master/LICENSE.txt"
+  },
+  "dependencies": {
+    "mpc": "0.0.x",
+    "ejs": "1.x",
+    "yargs": "1.2.x",
+    "less": "~1.7.4"
+  }
 }
