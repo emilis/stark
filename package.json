@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "stark",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Stark - a mpc web factory",
   "homepage": "https://github.com/emilis/stark",
   "author": {
