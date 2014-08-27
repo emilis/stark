@@ -52,7 +52,7 @@ function main(){
 
 function compile( src, dest ){
 
-    var index =     src + "/index.mpc";
+    var index =     src + "/index";
     var pages =     src + "/pages";
 
     stark.compileCss(   index, dest + "/style.css" );

@@ -20,7 +20,7 @@ module.exports = {
 
 function compileCss( src, dest ){
 
-    var components =    mpc.parseFile( src, {
+    var components =    mpc.parseComponent( src, {
         all:            true,
         recursive:      true,
         sort:           true,
@@ -43,7 +43,7 @@ function compileCss( src, dest ){
 
 function compileJs( src, dest ){
 
-    var components =    mpc.parseFile( src, {
+    var components =    mpc.parseComponent( src, {
         all:            true,
         recursive:      true,
         sort:           true,
@@ -56,7 +56,7 @@ function compileJs( src, dest ){
 
 function compilePage( src, dest ){
 
-    var component =         mpc.parseFile( src, {
+    var component =         mpc.parseComponent( src, {
         all:                true,
         fillRequirements:   true,
     })[0];
