@@ -90,8 +90,6 @@ function getTplRequirements( cCache, component ){
     
     if ( !component.tplRequirements ){
 
-        mpc.fillRequirements( cCache, component );
-        
         component.tplRequirements = _.assign(
             component.requiredComponents,
             component.requiredComponents,

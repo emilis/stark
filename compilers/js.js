@@ -1,7 +1,6 @@
 /// Requirements ---------------------------------------------------------------
 
 var mpc =               require( "mpc" );
-var modularity =        require( "mpc/modularity" );
 
 /// Constants ------------------------------------------------------------------
 
@@ -27,8 +26,8 @@ function compile( components ){
 
 function getJsModule( component ){
 
-    var exports =       modularity.getExports( component );
-    var requirements =  modularity.getRequirements( component );
+    var exports =       mpc.getExports( component );
+    var requirements =  mpc.getRequirements( component );
     var content =       mpc.getPartContent( component, "js" );
 
     var code =          [];

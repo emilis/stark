@@ -56,22 +56,24 @@ function compileJs( src, dest ){
 
 function compilePage( src, dest ){
 
-    var component =     mpc.parseFile( src, {
-        all:            true,
+    var component =         mpc.parseFile( src, {
+        all:                true,
+        fillRequirements:   true,
     })[0];
 
-    var page =          pageCompiler.compilePage( {}, component );
+    var page =              pageCompiler.compilePage( {}, component );
 
     return fs.writeFile( dest, page.content );
 }///
 
 function compilePages( src, dest ){
 
-    var components =    mpc.parseDir( src, {
-        all:            true,
+    var components =        mpc.parseDir( src, {
+        all:                true,
+        fillRequirements:   true,
     });
 
-    var pages =         pageCompiler.compile( components );
+    var pages =             pageCompiler.compile( components );
 
     pages.forEach( savePage( src, dest ));
 }///
