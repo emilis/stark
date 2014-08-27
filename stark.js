@@ -1,23 +1,19 @@
 /// Requirements ---------------------------------------------------------------
 
-var ejs =               require( "ejs" );
 var fs =                require( "fs" );
 var less =              require( "less" );
 var mpc =               require( "mpc" );
-var modularity =        require( "mpc/modularity" );
 
 var jsCompiler =        require( "./compilers/js" );
-
-/// Constants ------------------------------------------------------------------
-
-var JSNAMESPACE =       "window.Modules";
+var pageCompiler =      require( "./compilers/pages" );
 
 /// Exports --------------------------------------------------------------------
 
 module.exports = {
     compileCss:         compileCss,
     compileJs:          compileJs,
-    compileEjs:         compileEjs,
+    compilePage:        compilePage,
+    compilePages:       compilePages,
 };
 
 /// Functions ------------------------------------------------------------------
@@ -27,6 +23,7 @@ function compileCss( src, dest ){
     var components =    mpc.parseFile( src, {
         all:            true,
         recursive:      true,
+        sort:           true,
         parts:          [ "css", "less" ],
     });
     var content =       components.map( getPartContent([ "css", "less" ])).join( "\n" );
@@ -46,23 +43,37 @@ function compileCss( src, dest ){
 
 function compileJs( src, dest ){
 
-    var components = mpc.parseFile( src, {
-        all:        true,
-        recursive:  true,
-        sort:       true,
-        parts:      [ "js" ],
+    var components =    mpc.parseFile( src, {
+        all:            true,
+        recursive:      true,
+        sort:           true,
+        parts:          [ "js" ],
     });
 
     return fs.writeFileSync( dest, jsCompiler.compile( components ));
 }///
 
 
-function compileEjs( src, dest ){
+function compilePage( src, dest ){
 
-    var component =     mpc.parseFile( src )[0];
-    var cCache =        mpc.fillRequirements( {}, component );
+    var component =     mpc.parseFile( src, {
+        all:            true,
+    })[0];
 
-    return fs.writeFileSync( dest, fetchEjs( component )() );
+    var page =          pageCompiler.compilePage( {}, component );
+
+    return fs.writeFile( dest, page.content );
+}///
+
+function compilePages( src, dest ){
+
+    var components =    mpc.parseDir( src, {
+        all:            true,
+    });
+
+    var pages =         pageCompiler.compile( components );
+
+    pages.forEach( savePage( src, dest ));
 }///
 
 /// Private functions ----------------------------------------------------------
@@ -80,24 +91,11 @@ function getPartContent( parts ){
 }///
 
 
+function savePage( src, dest ){
+    return function( page ){
 
-function fetchEjs( component ){
+        var fileName =  page.name.replace( src, dest ) + "/index.html";
 
-    var requiredComponents =    component.requiredComponents;
-    var tplVars =               {};
-
-    for ( var k in requiredComponents ){
-        if ( requiredComponents[k] && mpc.hasPart( requiredComponents[k], "ejs" )){
-            tplVars[k] =        fetchEjs( requiredComponents[k] );
-        }
-    }
-
-    var ejsCode =               mpc.getPartContent( component, "ejs" );
-    return ejs.compile( ejsCode ).bind( ejs, tplVars );
-}///
-
-function debugObj( obj ){
-
-    console.log( obj && obj.name, Object.getOwnPropertyNames( obj ));
-    return obj;
+        return fs.writeFile( fileName, page.content );
+    };//
 }///

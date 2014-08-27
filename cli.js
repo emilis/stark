@@ -53,10 +53,15 @@ function main(){
 function compile( src, dest ){
 
     var index =     src + "/index.mpc";
+    var pages =     src + "/pages";
 
     stark.compileCss(   index, dest + "/style.css" );
     stark.compileJs(    index, dest + "/script.js" );
-    stark.compileEjs(   index, dest + "/index.html" );
+    stark.compilePage(  index, dest + "/index.html" );
+
+    if ( fs.existsSync( pages )){
+        stark.compilePages( pages, dest );
+    }
 
     if ( fs.existsSync( src + "/static" )){
         copyRecursiveSync(

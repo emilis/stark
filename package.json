@@ -25,8 +25,9 @@
   },
   "dependencies": {
     "mpc": "0.0.x",
-    "ejs": "1.x",
     "yargs": "1.2.x",
-    "less": "~1.7.4"
+    "less": "~1.7.4",
+    "yamljs": "~0.1.5",
+    "lodash": "~2.4.1"
   }
 }
