@@ -33,12 +33,7 @@ function compilePage( cCache, component ){
 function fetchContent( tpl, vars ){
 
     vars =              vars || { page: tpl };
-    try {
-        vars.content =  tpl( vars );
-    } catch( e ){
-        console.error( "Error:", e, "in", tpl.componentName );
-        console.error( tpl.source );
-    }
+    vars.content =      tpl( vars );
 
     var layout =        tpl.requirements.layout;
 
@@ -58,7 +53,7 @@ function getTpl( cCache, component ){
     try {
         var tplFn =     _.template( ejsContent );
     } catch( e ){
-        console.error( "Error:", e, "in", component.name );
+        console.error( "Template Syntax Error:", e, "in", component.name );
         console.error( ejsContent );
         throw( e );
     }
@@ -67,11 +62,16 @@ function getTpl( cCache, component ){
 
     function tpl( vars ){
 
-        return tplFn( _.extend( {},
-            exports.requirements,
-            exports.parts,
-            exports.yaml,
-            vars ));
+        try {
+            return tplFn( _.extend( {},
+                exports.requirements,
+                exports.parts,
+                exports.yaml,
+                vars ));
+        } catch( e ){
+            console.error( "Template Execution Error:", e, "in", component.name );
+            console.error( ejsContent );
+        }
     }///
 }///
 
