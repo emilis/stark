@@ -1,6 +1,7 @@
 /// Requirements ---------------------------------------------------------------
 
 var mpc =               require( "mpc" );
+var YAML =              require( "yamljs" );
 
 /// Constants ------------------------------------------------------------------
 
@@ -30,8 +31,13 @@ function getJsModule( component ){
     var requirements =  mpc.getRequirements( component );
     var content =       mpc.getPartContent( component, "js" );
 
+    var internalVars =  {
+            MODULE_ID:  component.name,
+            yaml:       YAML.parse( mpc.getPartContent( component, "yaml" )),
+            ejs:        mpc.getPartContent( component, "ejs" ),
+    };
+
     var code =          [];
-    var sep =           "";
 
     if ( content ){
         
@@ -41,15 +47,15 @@ function getJsModule( component ){
             "(function(",
                 mapObj( requirements, getVarName ).join( "," ),
             "){\n",
-            content,
-            ";\n"
+                mapObj( internalVars, getVarLine ).join( "\n" ), "\n",
+                content, ";\n"
         );
         
         /// Exports:
         if ( keys( exports ).length ){
             code.push(
                 JSNAMESPACE, '["', component.name, '"] = {', "\n",
-                mapObj( exports, getExportLine ).join( ",\n" ),
+                    mapObj( exports, getExportLine ).join( ",\n" ),
                 "\n};\n"
             );
         }
@@ -57,7 +63,7 @@ function getJsModule( component ){
         /// Imports:
         code.push(
             '})( ',
-            mapObj( requirements, getArgumentLine ).join( ", " ),
+                mapObj( requirements, getArgumentLine ).join( ", " ),
             " );\n"
         );
     }
@@ -69,6 +75,11 @@ function getJsModule( component ){
 function getVarName( v, k ){
 
     return k.replace( /[^0-9a-z]+/ig, "_" ).replace( /_+/g, "_" );
+}///
+
+function getVarLine( v, k ){
+
+    return "var " + k + " = " + JSON.stringify( v ) + ";";
 }///
 
 function getExportLine( v, k ){
