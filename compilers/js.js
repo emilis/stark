@@ -33,6 +33,7 @@ function getJsModule( component ){
 
     var internalVars =  {
             MODULE_ID:  component.name,
+            exports:    {},
             yaml:       YAML.parse( mpc.getPartContent( component, "yaml" )),
             ejs:        mpc.getPartContent( component, "ejs" ),
     };
@@ -54,9 +55,8 @@ function getJsModule( component ){
         /// Exports:
         if ( keys( exports ).length ){
             code.push(
-                JSNAMESPACE, '["', component.name, '"] = {', "\n",
-                    mapObj( exports, getExportLine ).join( ",\n" ),
-                "\n};\n"
+                mapObj( exports, getExportLine ).join( "\n" ), "\n",
+                JSNAMESPACE, '["', component.name, '"] = exports;\n"
             );
         }
 
@@ -84,7 +84,7 @@ function getVarLine( v, k ){
 
 function getExportLine( v, k ){
 
-    return k + ": " + v;
+    return "exports." + k + "= " + v + ";";
 }///
 
 function getArgumentLine( v ){
