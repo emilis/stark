@@ -56,7 +56,7 @@ function getJsModule( component ){
         if ( keys( exports ).length ){
             code.push(
                 mapObj( exports, getExportLine ).join( "\n" ), "\n",
-                JSNAMESPACE, '["', component.name, '"] = exports;\n"
+                JSNAMESPACE, "[\"", component.name, "\"] = exports;\n"
             );
         }
 
