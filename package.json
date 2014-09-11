@@ -15,7 +15,7 @@
     "url": "https://github.com/emilis/stark.git"
   },
   "bin": {
-    "mpc": "./bin/stark"
+    "stark": "./bin/stark"
   },
   "main": "./stark.js",
   "licenses": {
