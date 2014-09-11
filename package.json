@@ -23,7 +23,7 @@
     "url": "https://github.com/emilis/stark/blob/master/LICENSE.txt"
   },
   "dependencies": {
-    "mpc": ">=0.0.4",
+    "mpc": ">=0.0.6",
     "yargs": "1.2.x",
     "less": "~1.7.4",
     "yamljs": "~0.1.5",
