@@ -1,7 +1,6 @@
 /// Requirements ---------------------------------------------------------------
 
 var _ =                 require( "lodash" );
-var mpc =               require( "mpc" );
 var YAML =              require( "yamljs" );
 
 /// Exports --------------------------------------------------------------------
@@ -15,15 +14,15 @@ module.exports = {
 
 function compile( components ){
 
-    return components.map( compilePage.bind( this, {} ));
+    return components.map( compilePage );
 }///
 
 
-function compilePage( cCache, component ){
+function compilePage( component ){
 
     return {
         name:           component.name,
-        content:        fetchContent( getTpl( cCache, component )),
+        content:        fetchContent( getTpl( component )),
     };
 }///
 
@@ -45,9 +44,9 @@ function fetchContent( tpl, vars ){
 }///
 
 
-function getTpl( cCache, component ){
+function getTpl( component ){
 
-    var exports =       getTplExports( cCache, component );
+    var exports =       getTplExports( component );
     var ejsContent =    getTplParts( component ).ejs || "";
 
     try {
@@ -76,26 +75,38 @@ function getTpl( cCache, component ){
 }///
 
 
-function getTplExports( cCache, component ){
+function getTplExports( component ){
 
-    return {
+    var result = {
         componentName:  component.name,
-        requirements:   getTplRequirements( cCache, component ),
+        requirements:   getTplRequirements( component ),
         parts:          getTplParts( component ),
         yaml:           getYaml( component ),
     };
+
+    return result;
 }///
 
-function getTplRequirements( cCache, component ){
+function getTplRequirements( component ){
     
     if ( !component.tplRequirements ){
 
-        component.tplRequirements = _.assign(
+        component.tplRequirements = _.reduce(
             component.requiredComponents,
-            component.requiredComponents,
-            getTpl.bind( cCache ));
+            getRequirement,
+            {} );
     }
     return component.tplRequirements;
+
+    function getRequirement( res, rcomponent, rname ){
+        
+        if ( rcomponent ){
+            res[rname] =    getTpl( rcomponent );
+        } else {
+            res[rname] =    Error.bind( Error, "Tried to call missing requirement " + rname + " for " + component.name + "." );
+        }
+        return res;
+    }///
 }///
 
 function getTplParts( component ){

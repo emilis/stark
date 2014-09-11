@@ -61,7 +61,7 @@ function compilePage( src, dest ){
         fillRequirements:   true,
     })[0];
 
-    var page =              pageCompiler.compilePage( {}, component );
+    var page =              pageCompiler.compilePage( component );
 
     return fs.writeFile( dest, page.content );
 }///
