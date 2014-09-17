@@ -35,7 +35,7 @@ function getJsModule( component ){
             MODULE_ID:  component.name,
             exports:    {},
             yaml:       YAML.parse( mpc.getPartContent( component, "yaml" )),
-            ejs:        mpc.getPartContent( component, "ejs" ),
+            jst:        mpc.getPartContent( component, "jst" ),
     };
 
     var code =          [];
