@@ -3,6 +3,10 @@
 var _ =                 require( "lodash" );
 var YAML =              require( "yamljs" );
 
+/// Constants ------------------------------------------------------------------
+
+var TPL_PART =          "jst";
+
 /// Exports --------------------------------------------------------------------
 
 module.exports = {
@@ -47,13 +51,13 @@ function fetchContent( tpl, vars ){
 function getTpl( component ){
 
     var exports =       getTplExports( component );
-    var ejsContent =    getTplParts( component ).ejs || "";
+    var tplContent =    getTplParts( component )[ TPL_PART ] || "";
 
     try {
-        var tplFn =     _.template( ejsContent );
+        var tplFn =     _.template( tplContent );
     } catch( e ){
         console.error( "Template Syntax Error:", e, "in", component.name );
-        console.error( ejsContent );
+        console.error( tplContent );
         throw( e );
     }
 
@@ -69,7 +73,7 @@ function getTpl( component ){
                 vars ));
         } catch( e ){
             console.error( "Template Execution Error:", e, "in", component.name );
-            console.error( ejsContent );
+            console.error( tplContent );
         }
     }///
 }///
