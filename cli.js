@@ -20,6 +20,7 @@
 /// Requirements ---------------------------------------------------------------
 
 var fs =            require( "fs" );
+var path =          require( "path" );
 var stark =         require( "./stark" );
 var yargs =         require( "yargs" );
 
@@ -131,9 +132,11 @@ function copyRecursiveSync( src, dest ){
     var stats =         exists && fs.statSync( src );
     var isDirectory =   stats && stats.isDirectory();
   
-    if ( isDirectory ){
+    if( isDirectory ){
 
-        fs.mkdirSync( dest );
+        if( !fs.existsSync( dest )){
+            fs.mkdirSync( dest );
+        }
         fs.readdirSync( src ).forEach( copyChild );
     } else {
         fs.linkSync( src, dest );
