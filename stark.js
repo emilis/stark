@@ -3,6 +3,7 @@
 var fs =                require( "fs" );
 var less =              require( "less" );
 var mpc =               require( "mpc" );
+var mkdirp =            require( "mkdirp" );
 
 var jsCompiler =        require( "./compilers/js" );
 var pageCompiler =      require( "./compilers/pages" );
@@ -96,7 +97,10 @@ function getPartContent( parts ){
 function savePage( src, dest ){
     return function( page ){
 
-        var fileName =  page.name.replace( src, dest ) + "/index.html";
+        var dirName =   page.name.replace( src, dest );
+        var fileName =  dirName + "/index.html";
+
+        mkdirp.sync( dirName );
 
         return fs.writeFile( fileName, page.content );
     };//
