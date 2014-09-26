@@ -20,7 +20,8 @@
 /// Requirements ---------------------------------------------------------------
 
 var fs =            require( "fs" );
-var path =          require( "path" );
+var mkdirp =        require( "mkdirp" );
+var ncp =           require( "ncp" );
 var stark =         require( "./stark" );
 var yargs =         require( "yargs" );
 
@@ -56,6 +57,8 @@ function compile( src, dest ){
     var index =     src + "/index";
     var pages =     src + "/pages";
 
+    mkdirp( dest );
+
     stark.compileCss(   index, dest + "/style.css" );
     stark.compileJs(    index, dest + "/script.js" );
     stark.compilePage(  index, dest + "/index.html" );
@@ -65,7 +68,7 @@ function compile( src, dest ){
     }
 
     if ( fs.existsSync( src + "/static" )){
-        copyRecursiveSync(
+        ncp.ncp( 
             src + "/static",
             dest + "/static"
         );
@@ -122,30 +125,4 @@ function getVersion(){
         ];
 
     return str.join( "\n" );
-}///
-
-/// Utilities ------------------------------------------------------------------
-
-function copyRecursiveSync( src, dest ){
-
-    var exists =        fs.existsSync( src );
-    var stats =         exists && fs.statSync( src );
-    var isDirectory =   stats && stats.isDirectory();
-  
-    if( isDirectory ){
-
-        if( !fs.existsSync( dest )){
-            fs.mkdirSync( dest );
-        }
-        fs.readdirSync( src ).forEach( copyChild );
-    } else {
-        fs.linkSync( src, dest );
-    }
-    
-    function copyChild( childItemName ){
-
-        copyRecursiveSync(
-            path.join( src, childItemName ),
-            path.join( dest, childItemName ));
-    }///
 }///

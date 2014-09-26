@@ -50,7 +50,7 @@ function compileJs( src, dest ){
         parts:          [ "js" ],
     });
 
-    return fs.writeFileSync( dest, jsCompiler.compile( components ));
+    return fs.writeFile( dest, jsCompiler.compile( components ));
 }///
 
 
