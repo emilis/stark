@@ -26,9 +26,7 @@ function compileCss( src, dest ){
         recursive:      true,
         sort:           true,
         parts:          [ "css", "less" ],
-    });
-
-    components.pop();
+    }).filter( isNotComponent( src ));
 
     var content =       components.map( getPartContent([ "css", "less" ])).join( "\n" );
 
@@ -52,9 +50,7 @@ function compileJs( src, dest ){
         recursive:      true,
         sort:           true,
         parts:          [ "js" ],
-    });
-
-    components.pop();
+    }).filter( isNotComponent( src ));
 
     return fs.writeFile( dest, jsCompiler.compile( components ));
 }///
@@ -95,6 +91,14 @@ function getPartContent( parts ){
             }
         }
         return "";
+    };//
+}///
+
+
+function isNotComponent( name ){
+    return function( component ){
+
+        return component.name !== name;
     };//
 }///
 
