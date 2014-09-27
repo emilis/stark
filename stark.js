@@ -27,6 +27,9 @@ function compileCss( src, dest ){
         sort:           true,
         parts:          [ "css", "less" ],
     });
+
+    components.pop();
+
     var content =       components.map( getPartContent([ "css", "less" ])).join( "\n" );
 
     return less.render( content, onCss );
@@ -50,6 +53,8 @@ function compileJs( src, dest ){
         sort:           true,
         parts:          [ "js" ],
     });
+
+    components.pop();
 
     return fs.writeFile( dest, jsCompiler.compile( components ));
 }///
