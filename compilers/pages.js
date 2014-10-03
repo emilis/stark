@@ -12,6 +12,7 @@ var TPL_PART =          "jst";
 module.exports = {
     compile:            compile,
     compilePage:        compilePage,
+    getYaml:            getYaml,
 };
 
 /// Functions ------------------------------------------------------------------
@@ -22,11 +23,18 @@ function compile( components ){
 }///
 
 
-function compilePage( component ){
+function compilePage( component, site ){
+
+    var page =          getTpl( component );
+    var globals =       {
+        page:           page,
+        site:           site,
+    };
 
     return {
         name:           component.name,
-        content:        fetchContent( getTpl( component )),
+        permalink:      ( page.yaml && page.yaml.permalink ) || null,
+        content:        fetchContent( page, globals ),
     };
 }///
 

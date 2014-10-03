@@ -55,17 +55,12 @@ function main(){
 function compile( src, dest ){
 
     var index =     src + "/index";
-    var pages =     src + "/pages";
 
-    mkdirp( dest );
+    mkdirp.sync( dest );
 
-    stark.compileCss(   index, dest + "/style.css" );
-    stark.compileJs(    index, dest + "/script.js" );
-    stark.compilePage(  index, dest + "/index.html" );
-
-    if ( fs.existsSync( pages )){
-        stark.compilePages( pages, dest );
-    }
+    stark.compileCss(   index,  dest + "/style.css" );
+    stark.compileJs(    index,  dest + "/script.js" );
+    stark.compileSite(  src,    dest );
 
     if ( fs.existsSync( src + "/static" )){
         ncp.ncp( 

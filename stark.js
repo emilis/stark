@@ -4,6 +4,7 @@ var fs =                require( "fs" );
 var less =              require( "less" );
 var mpc =               require( "mpc" );
 var mkdirp =            require( "mkdirp" );
+var path =              require( "path" );
 
 var jsCompiler =        require( "./compilers/js" );
 var pageCompiler =      require( "./compilers/pages" );
@@ -13,6 +14,7 @@ var pageCompiler =      require( "./compilers/pages" );
 module.exports = {
     compileCss:         compileCss,
     compileJs:          compileJs,
+    compileSite:        compileSite,
     compilePage:        compilePage,
     compilePages:       compilePages,
 };
@@ -56,6 +58,61 @@ function compileJs( src, dest ){
 }///
 
 
+function compileSite( src, dest ){
+
+    var config =            mpc.parseComponent( src + "/config", {
+        all:                true,
+        fillRequirements:   true,
+    })[0];
+
+    var indexName =         src + "/index";
+    var index =             mpc.parseComponent( indexName, {
+        all:                true,
+        fillRequirements:   true,
+    });
+
+    var pages =             mpc.parseDir( src + "/pages", {
+        all:                true,
+        fillRequirements:   true,
+    });
+
+    var site = {
+        sourceDir:          src,
+        buildDir:           dest,
+        config:             pageCompiler.getYaml( config ),
+        pages:              index.concat( pages ),
+    };
+
+    site.pages.map( compileSitePage ).forEach( saveSitePage );
+
+
+    function compileSitePage( component ){
+
+        return pageCompiler.compilePage( component, site );
+    }///
+
+    function saveSitePage( page ){
+
+        var dirName;
+        var fileName;
+
+        if ( page.permalink ){
+            fileName =          dest + "/" + page.permalink;
+            dirName =           path.dirname( fileName );
+        } else if ( page.name === indexName ){
+            dirName =           dest;
+            fileName =          dirName + "/index.html";
+        } else {
+            dirName =           page.name.replace( src + "/pages", dest );
+            fileName =          dirName + "/index.html";
+        }
+
+        mkdirp.sync( dirName );
+        return fs.writeFile( fileName, page.content );
+    }///
+}///
+
+
 function compilePage( src, dest ){
 
     var component =         mpc.parseComponent( src, {
@@ -78,6 +135,18 @@ function compilePages( src, dest ){
     var pages =             pageCompiler.compile( components );
 
     pages.forEach( savePage( src, dest ));
+
+    function savePage( src, dest ){
+        return function( page ){
+
+            var dirName =   page.name.replace( src, dest );
+            var fileName =  dirName + "/index.html";
+
+            mkdirp.sync( dirName );
+
+            return fs.writeFile( fileName, page.content );
+        };//
+    }///
 }///
 
 /// Private functions ----------------------------------------------------------
@@ -102,15 +171,3 @@ function isNotComponent( name ){
     };//
 }///
 
-
-function savePage( src, dest ){
-    return function( page ){
-
-        var dirName =   page.name.replace( src, dest );
-        var fileName =  dirName + "/index.html";
-
-        mkdirp.sync( dirName );
-
-        return fs.writeFile( fileName, page.content );
-    };//
-}///
