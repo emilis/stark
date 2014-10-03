@@ -1,6 +1,7 @@
 /// Requirements ---------------------------------------------------------------
 
 var _ =                 require( "lodash" );
+var marked =            require( "marked" );
 var YAML =              require( "yamljs" );
 
 /// Constants ------------------------------------------------------------------
@@ -59,19 +60,43 @@ function fetchContent( tpl, vars ){
 function getTpl( component ){
 
     var exports =       getTplExports( component );
-    var tplContent =    getTplParts( component )[ TPL_PART ] || "";
+    var parts =         getTplParts( component );
+    var tplContent =    parts[TPL_PART] || "";
+    var tpl;
 
-    try {
-        var tplFn =     _.template( tplContent );
-    } catch( e ){
-        console.error( "Template Syntax Error:", e, "in", component.name );
-        console.error( tplContent );
-        throw( e );
+    if ( tplContent ){
+        try {
+            var tplFn = _.template( tplContent );
+        } catch( e ){
+            console.error( "Template Syntax Error:", e, "in", component.name );
+            console.error( tplContent );
+            throw( e );
+        }
+        tpl =           runTplFn;
+
+    } else if ( parts["html"] ){
+        
+        tpl =           _.constant( parts["html"] );
+    
+    } else if ( parts["php"] ){
+        
+        tpl =           _.constant( parts["php"] );
+    
+    } else if ( parts["md"] ){
+        
+        tpl =           marked.bind( marked, parts["md"] );
+
+    } else if ( parts["markdown"] ){
+
+        tpl =           marked.bind( marked, parts["markdown"] );
+    
+    } else {
+        tpl =           _.constant( "" );
     }
 
     return _.extend( tpl, exports );
-
-    function tpl( vars ){
+    
+    function runTplFn( vars ){
 
         try {
             return tplFn( _.extend( {},
