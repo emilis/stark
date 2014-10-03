@@ -79,7 +79,7 @@ function compileSite( src, dest ){
     var site = {
         sourceDir:          src,
         buildDir:           dest,
-        config:             pageCompiler.getYaml( config ),
+        config:             config && pageCompiler.getYaml( config ) || {},
         pages:              index.concat( pages ),
     };
 
