@@ -99,7 +99,7 @@ function getHelp(){
 
 function getVersion(){
 
-    var package =   fsUtils.readJson( __dirname + "/package.json" );
+    var package =   JSON.parse( fs.readFileSync( __dirname + "/package.json" ));
 
     var str = [
         package.description + " " + package.version,
