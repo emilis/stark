@@ -1,8 +1,6 @@
-#   Stark - a MPC web factory
+#   Stark – MPC compiler for the Web
 
-Currently a static site generator from Multi-Part Components.
-
-**Status:** This is a work in progress. A lot of rough edges. Also don't expect any backwards compatibility between versions.
+**Status:** This is a work in progress. A lot of rough edges. Also don't expect much backwards compatibility between versions.
 
 ## Installation
 
@@ -18,7 +16,7 @@ $ stark
 
 ##  Contributing
 
-*   Please use Github Issues for bug reporting and feature requests.
+*   Please use [Github Issues][issues] for bug reporting and feature requests.
 *   Please keep your pull requests small and make sure they merge easily with the master branch before submitting.
 *   Please send any other feedback to my email: <emilis.d@gmail.com>. It is most welcome.
 
@@ -31,3 +29,5 @@ This is free software, and you are welcome to redistribute it under certain cond
 ## Other
 
 _May we introduce you to Stark. Oh and by the way – good luck..._
+
+[issues]: https://github.com/emilis/stark/issues
