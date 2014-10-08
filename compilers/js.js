@@ -18,21 +18,23 @@ module.exports = {
 function compile( components ){
 
     var prefix =        ";" + JSNAMESPACE + "={};";
-    var modules =       components.map( getJsModule );
+    var basePath =      components.reduce( getShortestPath, null );
+    var modules =       components.map( getJsModule.bind( this, basePath ));
 
     return [ prefix ].concat( modules ).join( "\n" );
 }///
 
 /// Private functions ----------------------------------------------------------
 
-function getJsModule( component ){
+function getJsModule( basePath, component ){
 
+    var moduleName =    getModuleName( basePath, component.name );
     var exports =       mpc.getExports( component );
     var requirements =  mpc.getRequirements( component );
     var content =       mpc.getPartContent( component, "js" );
 
     var internalVars =  {
-            MODULE_ID:  component.name,
+            MODULE_ID:  moduleName,
             exports:    {},
             yaml:       YAML.parse( mpc.getPartContent( component, "yaml" )),
             jst:        mpc.getPartContent( component, "jst" ),
@@ -44,7 +46,7 @@ function getJsModule( component ){
         
         /// Module open:
         code.push(
-            ";// Module ", component.name, " ---\n",
+            ";// Module ", moduleName, " ---\n",
             "(function(",
                 mapObj( requirements, getVarName ).join( "," ),
             "){\n",
@@ -56,14 +58,14 @@ function getJsModule( component ){
         if ( keys( exports ).length ){
             code.push(
                 mapObj( exports, getExportLine ).join( "\n" ), "\n",
-                JSNAMESPACE, "[\"", component.name, "\"] = exports;\n"
+                JSNAMESPACE, "[\"", moduleName, "\"] = exports;\n"
             );
         }
 
         /// Imports:
         code.push(
             '})( ',
-                mapObj( requirements, getArgumentLine ).join( ", " ),
+                mapObj( requirements, getArgumentLine.bind( this, basePath )).join( ", " ),
             " );\n"
         );
     }
@@ -87,9 +89,36 @@ function getExportLine( v, k ){
     return "exports." + k + "= " + v + ";";
 }///
 
-function getArgumentLine( v ){
+function getArgumentLine( basePath, v ){
 
-    return JSNAMESPACE + '["' + v + '"]';
+    return JSNAMESPACE + '["' + getModuleName( basePath, v ) + '"]';
+}///
+
+function getShortestPath( curPath, component ){
+
+    if ( curPath === null ){
+        return component.name;
+    } else if ( !curPath.length ){
+        return curPath;
+    } else {
+        var name =      component.name;
+        var len =       Math.min( curPath.length, name.length );
+        var i =         0;
+        while ( i < len && curPath[i] === name[i] ){
+            i++;
+        }
+        return curPath.slice( 0, i );
+    }
+}///
+
+function getModuleName( basePath, name ){
+
+    /// Return name unchanged if it does not start with basePath:
+    if ( name.indexOf( basePath )){
+        return name;
+    } else {
+        return name.slice( basePath.length );
+    }
 }///
 
 /// Utilities ------------------------------------------------------------------
