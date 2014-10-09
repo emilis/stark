@@ -60,27 +60,34 @@ function compileJs( src, dest ){
 
 function compileSite( src, dest ){
 
-    var config =            mpc.parseComponent( src + "/config", {
-        all:                true,
-        fillRequirements:   true,
-    })[0];
+    var indexPath =             src + "/index";
+    var configPath =            src + "/config";
+    var pagesPath =             src + "/pages";
 
-    var indexName =         src + "/index";
-    var index =             mpc.parseComponent( indexName, {
-        all:                true,
-        fillRequirements:   true,
+    var config =                mpc.parseComponent( configPath, {
+        all:                    true,
+        fillRequirements:       true,
+    })[ 0 ];
+
+    var index =                 mpc.parseComponent( indexPath, {
+        all:                    true,
+        fillRequirements:       true,
     });
 
-    var pages =             mpc.parseDir( src + "/pages", {
-        all:                true,
-        fillRequirements:   true,
-    });
+    if ( fs.existsSync( pagesPath )){
+        var pages =             mpc.parseDir( pagesPath, {
+            all:                true,
+            fillRequirements:   true,
+        });
+    } else {
+        var pages =             [];
+    }
 
     var site = {
-        sourceDir:          src,
-        buildDir:           dest,
-        config:             config && pageCompiler.getYaml( config ) || {},
-        pages:              index.concat( pages ),
+        sourceDir:              src,
+        buildDir:               dest,
+        config:                 config && pageCompiler.getYaml( config ) || {},
+        pages:                  index.concat( pages ),
     };
 
     site.pages.map( compileSitePage ).forEach( saveSitePage );
@@ -99,7 +106,7 @@ function compileSite( src, dest ){
         if ( page.permalink ){
             fileName =          dest + "/" + page.permalink;
             dirName =           path.dirname( fileName );
-        } else if ( page.name === indexName ){
+        } else if ( page.name === indexPath ){
             dirName =           dest;
             fileName =          dirName + "/index.html";
         } else {
