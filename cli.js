@@ -35,21 +35,38 @@ module.exports = {
 
 function main(){
 
+    var dir =       process.cwd();
     var argv =      yargs
-                    .boolean( "h" )
-                    .boolean( "v" )
+                    .boolean( "h" ).alias( "h", "help" )
+                    .boolean( "v" ).alias( "v", "version" )
+                    .alias( "s", "source" ).default( "s", dir )
+                    .alias( "d", "destination" ).default( "d", dir + "/build" )
                     .argv;
 
-    if ( argv.v || argv.version ){
+    if ( argv.version ){
         return printAndExitOk( getVersion() );
     }
 
-    if ( argv.h || argv.help ){
+    if ( argv.help ){
         return printAndExitOk( getHelp() );
     }
         
-    var dir =       process.cwd();
-    compile( dir, dir + "/build" );
+    var command =   argv._ && argv._.length && argv._[0] || null;
+
+    switch( command ){
+
+        case "build":
+            compile( argv.source, argv.destination );
+            break;
+
+        case null:
+            console.error( getHelp() );
+            break;
+
+        default:
+            console.error( "Unknown command '" + command + "'.\n" );
+            console.error( getHelp() );
+    }
 }///
 
 function compile( src, dest ){
@@ -87,10 +104,19 @@ function printAndExitError( text, status ){
 function getHelp(){
 
     var str = [
-        "Usage: stark",
+        "Usage: stark COMMAND [OPTIONS]",
+        "",
+        "Commands:",
+        "",
+        "    build                  Compile the code into build/",
+        "",
         "Options:",
+        "",
+        "    -s / --source          Source directory (defaults to ./)",
+        "    -d / --destination     Destination directory (defaults to ./build/)",
         "    -h / --help            Print this help message.",
         "    -v / --version         Print version information.",
+        "",
         ];
 
     return str.join( "\n" );
