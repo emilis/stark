@@ -6,8 +6,8 @@ var mpc =               require( "mpc" );
 var mkdirp =            require( "mkdirp" );
 var path =              require( "path" );
 
-var jsCompiler =        require( "./compilers/js" );
-var pageCompiler =      require( "./compilers/pages" );
+var jsCompiler =        require( "./lib/compilers/js" );
+var pageCompiler =      require( "./lib/compilers/pages" );
 
 /// Exports --------------------------------------------------------------------
 
