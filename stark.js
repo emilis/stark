@@ -60,6 +60,9 @@ function compileJs( src, dest ){
 
 function compileSite( src, dest ){
 
+    src =                       path.resolve( src );
+    dest =                      path.resolve( dest );
+
     var indexPath =             src + "/index";
     var configPath =            src + "/config";
     var pagesPath =             src + "/pages";
@@ -110,7 +113,7 @@ function compileSite( src, dest ){
             dirName =           dest;
             fileName =          dirName + "/index.html";
         } else {
-            dirName =           page.name.replace( src + "/pages", dest );
+            dirName =           page.name.replace( pagesPath, dest );
             fileName =          dirName + "/index.html";
         }
 
