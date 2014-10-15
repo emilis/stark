@@ -14,7 +14,7 @@ image:              /static/logo.png
 
 --- html -------------------------------------------------------------------------
 
-<p><img src="/static/logo.png" alt="Stark"></p>
+<p><img src="static/logo.png" alt="Stark"></p>
 
 <!--<hr class="break">-->
 
