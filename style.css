@@ -1,61 +1,3 @@
-.with-hide-menu {
-  height: 100%;
-}
-.with-hide-menu,
-.with-hide-menu > .menu {
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  -ms-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-}
-.with-hide-menu > .menu {
-  margin-left: -14em;
-  width: 14em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-@media (max-width: 50em) {
-  .with-hide-menu {
-    /*
-        > main {
-            margin-top:     0;
-        }
-        */
-  }
-  .with-hide-menu > .menu {
-    background: #333;
-    color: #fff;
-  }
-}
-@media (min-width: 50em) {
-  .with-hide-menu {
-    padding-left: 14em;
-    left: 0;
-  }
-  .with-hide-menu > .menu {
-    left: 14em;
-    background: transparent none;
-  }
-}
-.break.def-table > .pure-table {
-  border: 0 none transparent;
-}
-.break.def-table > .pure-table td {
-  vertical-align: top;
-  border-color: #e7f0eb;
-  color: #222;
-}
-.break.def-table > .pure-table td:first-child {
-  padding-left: 0;
-}
-.break.def-table > .pure-table td:last-child {
-  padding-right: 0;
-}
 /*!
 Pure v0.5.0
 Copyright 2014 Yahoo! Inc. All rights reserved.
@@ -1359,7 +1301,7 @@ pre {
 #main > a.break:focus {
   border-bottom-color: #2b65a4;
 }
-@media (max-width: 50em) {
+@media (max-width: 48em) {
   body {
     background: #ffffff;
   }
@@ -1377,6 +1319,172 @@ pre {
     margin-bottom: 0;
     border-radius: 0;
   }
+}
+#main {
+  position: relative;
+  min-height: 100%;
+  max-width: 56em;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+  background: #ffffff;
+  border-top: 1em solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0 0 2em #485753;
+  z-index: 2;
+}
+#main > .header {
+  margin: 0;
+  color: #263436;
+  text-align: center;
+  padding: 2.5em 2em 0;
+  border-bottom: 1px solid #e7f0eb;
+}
+#main > .header > h1 {
+  margin: 0.2em 0;
+  font-size: 3em;
+  font-weight: 300;
+  line-height: 100%;
+}
+#main > .header > h2 {
+  font-weight: 300;
+  color: #778a85;
+  padding: 0;
+  margin-top: 0;
+}
+#main > .content {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  line-height: 1.6em;
+}
+#main.no-header > .header {
+  display: none;
+}
+@media (min-width: 48em) {
+  #main > .break,
+  #main > .content,
+  #main > .header {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  #main > .break > pre,
+  #main > .content > pre,
+  #main > .header > pre,
+  #main > .break > .break,
+  #main > .content > .break,
+  #main > .header > .break,
+  #main > .break > .full-width,
+  #main > .content > .full-width,
+  #main > .header > .full-width {
+    margin-left: -2em;
+    margin-right: -2em;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+@media (max-width: 48em) {
+  #main > .break,
+  #main > .content,
+  #main > .header {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  #main > .break > pre,
+  #main > .content > pre,
+  #main > .header > pre,
+  #main > .break > .break,
+  #main > .content > .break,
+  #main > .header > .break,
+  #main > .break > .full-width,
+  #main > .content > .full-width,
+  #main > .header > .full-width {
+    margin-left: -1em;
+    margin-right: -1em;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+.with-hide-menu {
+  height: 100%;
+}
+.with-hide-menu,
+.with-hide-menu > .menu {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.with-hide-menu > .menu {
+  margin-left: -12em;
+  width: 12em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 48em) {
+  .with-hide-menu {
+    /*
+        > main {
+            margin-top:     0;
+        }
+        */
+  }
+  .with-hide-menu > .menu {
+    background: #333;
+    color: #fff;
+  }
+}
+@media (min-width: 48em) {
+  .with-hide-menu {
+    padding-left: 12em;
+    left: 0;
+  }
+  .with-hide-menu > .menu {
+    left: 12em;
+    background: transparent none;
+  }
+}
+.stark-menu {
+  position: relative;
+  min-height: 100%;
+  padding: 2em 0;
+  box-sizing: border-box;
+  background: #c8d7cf;
+  color: #000000;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+.stark-menu > ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stark-menu > ul > li {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stark-menu > ul > li > a {
+  display: block;
+  padding: 0.25em 1em;
+  text-decoration: none;
+  color: #000000;
+  border: 0 none transparent;
+  /*
+                &:hover {
+                    background:     @graydd;
+                    border-color:   @grayee;
+                }
+                */
+}
+.stark-menu > ul > li > a:hover {
+  background: transparent;
 }
 main > .footer-spacer {
   clear: both;
@@ -1436,7 +1544,7 @@ main > footer#footer > ul,
 main > footer#footer > p {
   margin-bottom: 1em;
 }
-@media (max-width: 50em) {
+@media (max-width: 48em) {
   main > .footer-spacer {
     height: 30em;
   }
@@ -1454,128 +1562,6 @@ main > footer#footer > p {
     border-radius: 0;
   }
 }
-.stark-menu {
-  position: relative;
-  min-height: 100%;
-  padding: 2em 0;
-  box-sizing: border-box;
-  background: #c8d7cf;
-  color: #000000;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-.stark-menu > ul {
-  display: block;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.stark-menu > ul > li {
-  display: block;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.stark-menu > ul > li > a {
-  display: block;
-  padding: 0.25em 1em;
-  text-decoration: none;
-  color: #000000;
-  border: 0 none transparent;
-  /*
-                &:hover {
-                    background:     @graydd;
-                    border-color:   @grayee;
-                }
-                */
-}
-.stark-menu > ul > li > a:hover {
-  background: transparent;
-}
-#main {
-  position: relative;
-  min-height: 100%;
-  max-width: 56em;
-  margin-top: 0;
-  margin-bottom: 0;
-  border-radius: 0;
-  background: #ffffff;
-  border-top: 1em solid #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0 0 2em #485753;
-  z-index: 2;
-}
-#main > .header {
-  margin: 0;
-  color: #263436;
-  text-align: center;
-  padding: 2.5em 2em 0;
-  border-bottom: 1px solid #e7f0eb;
-}
-#main > .header > h1 {
-  margin: 0.2em 0;
-  font-size: 3em;
-  font-weight: 300;
-  line-height: 100%;
-}
-#main > .header > h2 {
-  font-weight: 300;
-  color: #778a85;
-  padding: 0;
-  margin-top: 0;
-}
-#main > .content {
-  margin: 0 auto;
-  margin-bottom: 50px;
-  line-height: 1.6em;
-}
-#main.no-header > .header {
-  display: none;
-}
-@media (min-width: 50em) {
-  #main > .break,
-  #main > .content,
-  #main > .header {
-    padding-left: 2em;
-    padding-right: 2em;
-  }
-  #main > .break > pre,
-  #main > .content > pre,
-  #main > .header > pre,
-  #main > .break > .break,
-  #main > .content > .break,
-  #main > .header > .break,
-  #main > .break > .full-width,
-  #main > .content > .full-width,
-  #main > .header > .full-width {
-    margin-left: -2em;
-    margin-right: -2em;
-    padding-left: 2em;
-    padding-right: 2em;
-  }
-}
-@media (max-width: 50em) {
-  #main > .break,
-  #main > .content,
-  #main > .header {
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-  #main > .break > pre,
-  #main > .content > pre,
-  #main > .header > pre,
-  #main > .break > .break,
-  #main > .content > .break,
-  #main > .header > .break,
-  #main > .break > .full-width,
-  #main > .content > .full-width,
-  #main > .header > .full-width {
-    margin-left: -1em;
-    margin-right: -1em;
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-}
 code.unselectable {
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -1586,4 +1572,18 @@ code.unselectable {
 }
 .shell-code > code.unselectable {
   color: #778a85;
+}
+.break.def-table > .pure-table {
+  border: 0 none transparent;
+}
+.break.def-table > .pure-table td {
+  vertical-align: top;
+  border-color: #e7f0eb;
+  color: #222;
+}
+.break.def-table > .pure-table td:first-child {
+  padding-left: 0;
+}
+.break.def-table > .pure-table td:last-child {
+  padding-right: 0;
 }
