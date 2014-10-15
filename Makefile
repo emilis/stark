@@ -35,5 +35,6 @@ publish-docs:\
 		git add . ;\
 		git status ;\
 		git commit -am 'Rebuilt site.' ;\
-		git push github gh-pages
+		git push github gh-pages ;\
+		git push origin gh-pages
 
