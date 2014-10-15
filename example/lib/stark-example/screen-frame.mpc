@@ -1,0 +1,24 @@
+--- jst ------------------------------------------------------------------------
+
+<div class="screen-frame">
+    <img src="<%- img %>" alt="<%- alt %>">
+    <%= text %>
+</div>
+
+--- less -----------------------------------------------------------------------
+
+.screen-frame {
+
+    border:         1em ridge #333;
+    padding:        0.5em;
+    text-align:     left;
+
+    background:     #000;
+    color:          #0c0;
+
+    > img {
+            display:    block;
+            margin:     1em auto;
+            max-width:  100%;
+    }
+}

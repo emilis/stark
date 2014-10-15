@@ -1,0 +1,130 @@
+--- requirements ---------------------------------------------------------------
+
+../zepto/zepto
+
+--- yaml -----------------------------------------------------------------------
+
+label:              Click me!
+url:                ""
+messages:
+    -   Click me again!
+    -   I dare you
+    -   I double dare you
+    -   Click me one more time
+    -   Do I look like your b*tch?
+    -   "*~BANG!~*"
+    -   OK then.
+
+
+--- jst ------------------------------------------------------------------------
+
+<%
+var href=   url ? 'href="'+url+'"' : "";
+%>
+<div class="teh-button-placeholder">
+    <div class="teh-button" data-messages="<%- JSON.stringify( messages ) %>">
+        <a class="button" <%= href %>><%- label %></a>
+    </div>
+</div>
+
+--- js -------------------------------------------------------------------------
+
+$( init );
+
+function init(){
+
+    $( ".teh-button" ).forEach( initButton );
+}///
+
+function initButton( div ){
+
+    var messages =      JSON.parse( div.getAttribute( "data-messages" ));
+    var count =         0;
+
+    var $div =          $( div );
+    var $button =       $div.children( ".button" );
+
+    $button.one( "click", startFun );
+
+    function startFun( evt ){
+
+        evt.preventDefault();
+
+        $div.on( "mouseover",   nextMessage );
+        $button.on( "click",    nextMessage );
+        nextMessage( evt );
+    }
+
+    function nextMessage( evt ){
+
+        if ( count < messages.length ){
+
+            evt.preventDefault();
+
+            if ( !count ){
+                $div.css( "position", "absolute" );
+                $div.addClass( "hot" );
+            } else if ( count === messages.length - 1 ){
+                $div.removeClass( "hot" );
+            }
+
+            $button.text( messages[count] );
+
+            var pos =           getOppositePos( $div, evt );
+            $div.css( "left", pos.x + "px" );
+
+            count++;
+        }
+    }///
+}///
+
+
+/**
+ *  Return a position in the screen corner opposite to mouse position.
+ */
+function getOppositePos( $div, evt ){
+
+    var $win =      $( window );
+    return {
+        x:  ( evt.clientX > $win.width() / 2 )  ? 0 : $win.width() - $div.width(),
+        y:  ( evt.clientY > $win.height() / 2 ) ? 0 : $win.height() - $div.height()
+    };
+}///
+
+--- less -----------------------------------------------------------------------
+
+.teh-button-placeholder {
+
+    height:                 6em;
+}
+
+.teh-button {
+
+    padding:                2em;
+    z-index:                9001;
+
+    > .button {
+
+        padding:            0.5em;
+        border:             2px outset green;
+        border-radius:      10px;
+        white-space:        nowrap;
+        cursor:             pointer;
+
+        background:         green;
+        color:              white;
+
+        font-size:          150%;
+        font-weight:        bold;
+        text-decoration:    none;
+
+        &:hover {
+            border-width:   0;
+        }
+    }
+
+    &.hot > .button {
+        border-color:       orange;
+        background-color:   orange;
+    }
+}

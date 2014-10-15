@@ -1,0 +1,88 @@
+--- requirements ---------------------------------------------------------------
+
+../zepto/zepto
+
+--- yaml -----------------------------------------------------------------------
+
+label:                      Show source
+
+--- jst ------------------------------------------------------------------------
+
+<div class="show-source">
+    <a class="toggle-on"><%- label %> [+]</a>
+    <a class="toggle-off" style="display: none"><%- component.componentName %>.mpc [–]</a>
+    <div class="code">
+        <pre><%
+            for ( var name in component.parts ){
+                %><b>--- <%- name %> --------------------------------------</b>
+
+<%- component.parts[name] %>
+
+<%
+            }
+        %></pre>
+    </div>
+</div>
+
+--- less -----------------------------------------------------------------------
+
+.show-source {
+
+    clear:                  both;
+    border:                 1px solid #ccc;
+
+    > .toggle-on,
+    > .toggle-off {
+        
+        display:            block;
+        padding:            0.5em 1em;
+        
+        color:              #999;
+        text-decoration:    underline;
+        cursor:             pointer;
+    }
+
+    pre {
+
+        margin:             0;
+        background-color:   #eee;
+        white-space:        pre-wrap;
+    }
+}
+
+--- js -------------------------------------------------------------------------
+
+$( init );
+
+function init(){
+
+    $( ".show-source" ).forEach( initElement );
+}///
+
+
+function initElement( div ){
+
+    var $div =              $( div );
+    var $toggleOn =         $div.children( ".toggle-on" );
+    var $toggleOff =        $div.children( ".toggle-off" );
+    var $code =             $div.children( ".code" );
+
+    hideCode();
+
+    $toggleOn.on( "click",  showCode );
+    $toggleOff.on( "click", hideCode );
+
+    function showCode(){
+
+        $toggleOn.hide();
+        $toggleOff.show();
+        $code.show();
+    }///
+
+    function hideCode(){
+
+        $toggleOn.show();
+        $toggleOff.hide();
+        $code.hide();
+    }///
+}///
