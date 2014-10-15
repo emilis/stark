@@ -21,4 +21,6 @@ openUrl:        http://localhost:7780
 
 <%= shellCode({ content: launchCode }) %>
 
-<p>Then open the link in your browser: <a href="<%- openUrl %>"><%- openUrl %></a>.</p>
+<p>Then open the printed link in your browser (usually it's <a href="<%- openUrl %>"><%- openUrl %></a>). You should see a page like this:</p>
+
+<p class="break" align="center"><img src="static/success.png" alt="Success" width="40%"></p>
