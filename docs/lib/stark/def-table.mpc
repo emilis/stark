@@ -1,0 +1,75 @@
+--- yaml -----------------------------------------------------------------------
+
+prefix:         def
+
+--- jst ------------------------------------------------------------------------
+
+<%
+
+var csv =       content.split( "\n" ).map( splitRow );
+
+function splitRow( str ){
+
+    return str.split( "|" ).map( trim );
+}///
+
+function trim( str ){
+    
+    return str && str.trim && str.trim() || "";
+}///
+
+%>
+<div class="break def-table">
+    <table class="pure-table">
+        <tbody>
+        <%
+            for ( var r=0; r<csv.length; r++ ){
+
+                print( '<tr>' );
+
+                print( '<td class="tinted">' );
+                if ( csv[r][0] ){
+                    print( '<a href="#', prefix, '-', csv[r][0], '">', csv[r][1], '</a>' );
+                } else {
+                    print( csv[r][1] );
+                }
+                print( '</td>' );
+
+                print( '<td class="">', csv[r][2] );
+                if ( csv[r][3] ){
+                    print( ' <small>', csv[r][3], '</small>' );
+                }
+                print( '</td>' );
+
+                print( '</tr>' );
+            }
+        %>
+        </tbody>
+    </table>
+</div>
+
+--- less -----------------------------------------------------------------------
+
+.break.def-table {
+
+    > .pure-table {
+
+        border:                     0 none transparent;
+
+        td {
+            
+            vertical-align:         top;
+            border-color:           @grayee;
+            color:                  #222;
+
+            &:first-child {
+
+                padding-left:       0;
+            }
+            &:last-child {
+
+                padding-right:      0;
+            }
+        }
+    }
+}

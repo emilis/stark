@@ -1,0 +1,63 @@
+--- requirements ---------------------------------------------------------------
+
+palette
+
+--- less -----------------------------------------------------------------------
+
+/// Sizes: ---------------------------------------------------------------------
+
+@wContent:      36em;
+@wContentMax:   56em;
+@wMenu:         14em;
+@wMobile:       ( @wContent + @wMenu );
+@wWide:         ( @wContentMax + @wMenu );
+@hHigh:         52em;
+
+@marginW:       2em;
+@marginN:       1em;
+@marginWpre:    @marginW / 0.75;
+@marginNpre:    @marginN / 0.75;
+
+@borderRadius:  4px;
+
+/// Fonts: ---------------------------------------------------------------------
+
+@sans:      sans;
+@serif:     Cambria, serif;
+@code:      @serif;
+@mono:      monospace;
+
+/// Colors: --------------------------------------------------------------------
+
+@black:     #000;
+@gray0:     @gray33; //#38342c;
+@gray1:     @gray66; //#5f594b;
+@gray2:     @gray99; //#968e7a;
+@gray3:     @graycc; //#c2bdb2;
+@gray4:     @graydd; //#d8d5ce;
+@gray5:     @grayee; //#efece9;
+@tint:      @grayfe; //#fcfbf9;
+@white:     #fff;
+
+@blueD:     @blue66; //#13273d;
+@blueN:     @blue99; //#22446a;
+@blueL:     @bluecc; //#3a75b6;
+
+@linkCol:           @bluecc;
+@linkColVisited:    @blue99;
+
+@col000:    @black;
+@col222:    @gray0;
+@col333:    @gray0;
+@col555:    @gray1;
+@col666:    @gray1;
+@col777:    @gray1;
+@col888:    @gray2;
+@col999:    @gray2;
+@colaaa:    @gray3;
+@colbbb:    @gray3;
+@colccc:    @gray3;
+@colddd:    @gray4;
+@coleee:    @gray5;
+@colfff:    @white;
+@colink:    @linkCol;

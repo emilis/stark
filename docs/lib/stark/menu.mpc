@@ -1,0 +1,75 @@
+--- requirements ---------------------------------------------------------------
+
+theme
+
+--- yaml -----------------------------------------------------------------------
+
+pages:                  []
+
+--- jst ------------------------------------------------------------------------
+
+<div class="stark-menu">
+    <ul>
+        <li><a href="#"><b>Stark</b></a></li>
+        <% pages.forEach( showLink ) %>
+    </ul>
+</div>
+<%
+
+function showLink( p ){
+
+    %><li><a href="#<%- p.yaml.id %>"><%- p.yaml.title %></a></li><%
+}///
+
+%>
+
+--- less -----------------------------------------------------------------------
+
+.nolist(){
+
+    display:            block;
+    list-style:         none;
+    padding:            0;
+    margin:             0;
+}
+
+.stark-menu {
+
+    position:           relative;
+    min-height:         100%;
+    padding:            2em 0;
+    box-sizing:         border-box;
+    background:         @graydd;
+    color:              @black;
+
+    overflow-x:         hidden;
+    white-space:        nowrap;
+
+    > ul {
+        .nolist();
+
+        > li {
+
+            .nolist();
+
+            > a {
+                display:            block;
+                padding:            0.25em 1em; ///0.5em 0 0.5em 1em;
+                text-decoration:    none;
+                color:              @black;
+                border:             0 none transparent;
+
+                &:hover {
+                    background:     transparent;
+                }
+
+                /*
+                &:hover {
+                    background:     @graydd;
+                    border-color:   @grayee;
+                }
+                */
+            }
+        }
+    }
+}

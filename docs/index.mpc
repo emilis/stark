@@ -1,0 +1,30 @@
+--- requirements ---------------------------------------------------------------
+
+layout:             lib/emilis/html5
+pager:              lib/stark/pager
+
+quickstart:         pages/quickstart
+download:           pages/download
+files:              pages/files
+
+--- yaml -----------------------------------------------------------------------
+
+title:              Stark
+image:              /static/logo.png
+
+--- html -------------------------------------------------------------------------
+
+<p><img src="/static/logo.png" alt="Stark"></p>
+
+<!--<hr class="break">-->
+
+<p>Stark is a multi-part component compiler for the Web. You can build static websites and single-page applications with Stark.</p>
+
+--- jst ------------------------------------------------------------------------
+
+<%= pager({
+        prefix:     html,
+        pages: [
+                    quickstart,
+                    files,
+        ]}) %>

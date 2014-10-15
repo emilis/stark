@@ -1,0 +1,220 @@
+--- requirements ---------------------------------------------------------------
+
+../pure/pure-min
+theme/variables
+
+--- less -----------------------------------------------------------------------
+
+/// Overrides: -----------------------------------------------------------------
+
+body {
+    position:       absolute;
+    width:          100%;
+    height:         100%;
+    background:     @graycc;
+    color:          @gray33;
+    font-family:    @sans;
+}
+
+
+
+a:link {
+    color:          @linkCol;
+    padding:        2px 0;
+    border-bottom:  1px solid transparent;
+}
+
+a:focus,
+a:hover {
+    text-decoration:    none;
+    background:         @coleee;
+    color:              @linkColVisited;
+    border-bottom:      1px solid @linkCol;
+}
+
+a:visited {
+    color:              @linkColVisited;
+    border-color:       @linkColVisited;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family:    Georgia, @serif;
+    font-family:    Tahoma, @sans;
+    > a:link,
+    > a:visited  {
+        //text-decoration:    none;
+        color:              @gray66;
+    }
+}
+
+label {
+    cursor:         pointer;
+}
+
+blockquote {
+    margin-right:   0;
+    font-family:    @serif;
+    font-style:     italic;
+    font-weight:    500;
+}
+
+pre {
+    margin-top:     1em;
+    margin-bottom:  1em;
+    /// font-size:      90%;
+    line-height:    1.5em;
+    font-family:    @sans;
+    > code {
+        padding:    0;
+        background: transparent;
+    }
+}
+
+code {
+    background-color:   @grayee;
+    padding:            2px 4px;
+    border-radius:      @borderRadius;
+}
+
+#main > .content > pre {
+    background-color:   @gray33 !important;
+    color:              @grayee;
+    border-top:         1px solid @black;
+}
+
+hr {
+    border: 0 none transparent;
+    border-top:     1px solid @grayee;
+    border-bottom:  1px solid @graycc;
+
+    > .break {
+        box-shadow: 1px 1px 10px @gray33;
+    }
+}
+
+.pure-table-striped tr:nth-child(2n-1) td {
+
+    background-color:   @tint;
+}
+
+.clearfix {
+    clear:      both;
+}
+
+.gray-back {
+    border-width:       1px 0;
+    /// padding-top:        -1px;
+    /// padding-bottom:     -1px;
+    border-style:       solid none;
+    border-color:       @coleee transparent;
+    background-color:   @tint;
+    /// text-shadow:        1px 1px 0px @white;
+}
+
+a.blocklink {
+    display:        block;
+    padding:        1em 0;
+}
+
+.pure-menu a {
+    white-space: normal;
+}
+
+pre {
+    padding-top:        1em;
+    padding-bottom:     1em;
+}
+
+
+#main {
+
+    position:           relative;
+    min-height:         100%;
+
+    > .header {
+        
+        text-align:     left;
+        padding-top:    1.2em;
+
+        > h1 {
+            color:          @col999;
+            line-height:    1.2em;
+        }
+        > h2 {
+            color:      @colccc;
+        }
+    }
+
+    > .content {
+        
+        .clearfix();
+        margin:         0;
+
+        > * {
+            max-width:  @wContent;
+        }
+        > blockquote {
+            max-width:  ( @wContent - 4em );
+        }
+
+        > hr,
+        > table,
+        > pre,
+        > .break,
+        > .full-width {
+            max-width:  200%;
+        }
+
+        > pre,
+        > .break {
+            .gray-back;
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            line-height:    1.6em;
+        }
+
+        small {
+            color:          @gray99;
+        }
+    }
+
+    > .break {
+        display:        block;
+        .clearfix();
+        margin:         1em 0;
+        padding-top:    1em;
+        padding-bottom: 1em;
+        .gray-back;
+    }
+    > a.break:hover,
+    > a.break:focus {
+        border-bottom-color:    @linkCol;
+    }
+}
+
+@media( max-width: @wMobile ){
+
+    body {
+        background:     @white;
+    }
+
+    pre {
+        font-size:      75%;
+        line-height:    1.5em;
+    }
+
+    #main > .bottom-menu {
+        padding:        1em 0;
+    }
+}
+
+@media ( max-height: @hHigh ){
+
+    #layout > main {
+
+        margin-top:     0;
+        margin-bottom:  0;
+        border-radius:  0;
+    }
+}

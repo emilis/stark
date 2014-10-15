@@ -1,0 +1,48 @@
+--- jst ------------------------------------------------------------------------
+
+<%
+
+var csv =       content.split( "\n" ).map( splitRow );
+
+%><pre class="shell-code"><%
+
+    for ( var r=0; r<csv.length; r++ ){
+
+        if ( csv[r][0] ){
+            print( '<code class="unselectable">', csv[r][0], ' </code>' );
+        }
+        print( '<code>', csv[r][1], '</code>', "\n" );
+    }
+
+%></pre><%
+
+function splitRow( str ){
+
+    return str.split( "|" ).map( trim );
+}///
+
+function trim( str ){
+    
+    return str && str.trim && str.trim() || "";
+}///
+
+%>
+
+--- less -----------------------------------------------------------------------
+
+code.unselectable {
+    
+    -moz-user-select:       none;
+    -webkit-user-select:    none;
+    -ms-user-select:        none;
+}
+
+.shell-code > code {
+
+    color:                  @white;
+
+    &.unselectable {
+
+        color:              @gray99;
+    }
+}

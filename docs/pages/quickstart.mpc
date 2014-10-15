@@ -1,0 +1,24 @@
+--- requirements ---------------------------------------------------------------
+
+shellCode:      ../lib/stark/shell-code
+
+--- yaml -----------------------------------------------------------------------
+
+id:             quickstark
+title:          Quick Start
+openUrl:        http://localhost:7780
+
+--- launchCode -----------------------------------------------------------------
+
+~$          |   npm install -g stark
+~$          |   stark new yoursite
+~$          |   cd yoursite/
+~/yoursite$ |   stark serve
+
+--- jst ------------------------------------------------------------------------
+
+<p>Run this in your terminal:</p>
+
+<%= shellCode({ content: launchCode }) %>
+
+<p>Then open the link in your browser: <a href="<%- openUrl %>"><%- openUrl %></a>.</p>

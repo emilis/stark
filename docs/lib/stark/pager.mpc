@@ -1,0 +1,31 @@
+--- requirements ---------------------------------------------------------------
+
+layout:             ../emilis/html5
+structure:          ../emilis/with-hide-menu
+main:               main-content
+menu:               menu
+footer:             footer
+theme
+
+--- jst ------------------------------------------------------------------------
+
+<%
+
+print( structure({
+    menu:           menu({ pages: pages }),
+    content:        main({
+        noHeader:   true,
+        content:    prefix + pages.map( getPageHtml ).join( "" ),
+        footer:         footer({ pages: pages }),
+    }),
+}));
+
+function getPageHtml( p ){
+
+    return [].concat(
+        '<h2 id="', p.yaml.id, '">', p.yaml.title, '</h2>',
+        p()
+        ).join( "" );
+}///
+
+%>

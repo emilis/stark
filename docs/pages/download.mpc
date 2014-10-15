@@ -1,0 +1,12 @@
+--- yaml -----------------------------------------------------------------------
+
+id:                 download
+title:              Download
+
+--- md -------------------------------------------------------------------------
+
+You will need Node.js and npm to install Stark. You can [get Node.js and npm here][nodejs-install]. Then run this from your command line:
+
+    $ npm install -g stark
+
+[nodejs-install]:   http://nodejs.org/download/

@@ -1,0 +1,57 @@
+--- requirements ---------------------------------------------------------------
+
+defTable:           ../lib/stark/def-table
+
+--- yaml -----------------------------------------------------------------------
+
+id:                 files
+title:              Files and Directories
+
+--- fileTable ------------------------------------------------------------------
+
+build   |   build/      |   Output directory.           |   Stark will create it if it is missing.
+index   |   index.mpc   |   Home page. Starting point.  |   Required.
+config  |   config.mpc  |   Site-wide configuration.    |   Optional.
+lib     |   lib/        |   Components directory.       |   Optional.
+pages   |   pages/      |   Pages directory.            |   Optional.
+static  |   static/     |   Static files directory.     |   Optional.
+
+--- buildFiles -----------------------------------------------------------------
+
+| index.html            |   Home page created from index.mpc
+| style.css             |   CSS style built from requirements of index.mpc
+| script.js             |   JavaScript modules build from requirements of index.mpc
+| static/               |   Files copied over from static/
+| somepage/ index.html  |   Page created from pages/somepage.mpc
+
+--- jst ------------------------------------------------------------------------
+
+<p>Now lets look through the contents of your site directory:</p>
+
+<%= defTable({
+    prefix:     id,
+    content:    fileTable,
+    }) %>
+
+<%= subtitle( id, "build", "build/" ) %>
+
+<p>You will find the compiled pages, scripts, styles and other files here. Directory contents may look like this:</p>
+
+<%= defTable({
+    prefix:     id,
+    content:    buildFiles,
+    }) %>
+
+<%= subtitle( id, "index", "index.mpc" ) %>
+
+<p>This is the main page of the site.</p>
+
+<%
+/// Functions ------------------------------------------------------------------
+
+function subtitle( prefix, name, title ){
+
+    return '<h3 id="' + prefix + '-' + name + '">' + title + '</h4>';
+}///
+
+%>
