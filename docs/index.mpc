@@ -1,6 +1,6 @@
 --- requirements ---------------------------------------------------------------
 
-layout:             lib/emilis/html5
+layout:             lib/stark/html5
 pager:              lib/stark/pager
 
 quickstart:         pages/quickstart

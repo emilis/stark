@@ -1,6 +1,5 @@
 --- requirements ---------------------------------------------------------------
 
-layout:             ../emilis/html5
 structure:          ../emilis/with-hide-menu
 main:               main-content
 menu:               menu

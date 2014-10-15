@@ -23,8 +23,8 @@ var timestamp =         ( new Date() ).getTime().toString( 36 );
         <meta property="og:image" content="<%- page_image %>">
     <% } %>
     <title><%- title %></title>
-    <link rel="stylesheet" href="/style.css?<%- timestamp %>">
-    <script async="async" defer="defer" src="/script.js?<%- timestamp %>"></script>
+    <link rel="stylesheet" href="style.css?<%- timestamp %>">
+    <script async="async" defer="defer" src="script.js?<%- timestamp %>"></script>
     <style type="text/css">
         <%= page_css %>
     </style>
