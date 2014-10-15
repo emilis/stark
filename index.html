@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <meta property="og:image" content="/static/logo.png">
+    
+    <title>Stark</title>
+    <link rel="stylesheet" href="/style.css?i1b8ifxv">
+    <script async="async" defer="defer" src="/script.js?i1b8ifxv"></script>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <div class="with-hide-menu">
+    <nav class="menu">
+        <div class="stark-menu">
+    <ul>
+        <li><a href="#"><b>Stark</b></a></li>
+        <li><a href="#quickstark">Quick Start</a></li><li><a href="#files">Files and Directories</a></li>
+    </ul>
+</div>
+
+    </nav>
+
+    <main id="main" class="no-header">
+    <header class="header">
+        
+    </header>
+
+    <div class="content">
+        <p><img src="/static/logo.png" alt="Stark"></p>
+
+<!--<hr class="break">-->
+
+<p>Stark is a multi-part component compiler for the Web. You can build static websites and single-page applications with Stark.</p><h2 id="quickstark">Quick Start</h2><p>Run this in your terminal:</p>
+
+<pre class="shell-code"><code class="unselectable">~$ </code><code>npm install -g stark</code>
+<code class="unselectable">~$ </code><code>stark new yoursite</code>
+<code class="unselectable">~$ </code><code>cd yoursite/</code>
+<code class="unselectable">~/yoursite$ </code><code>stark serve</code>
+</pre>
+
+<p>Then open the link in your browser: <a href="http://localhost:7780">http://localhost:7780</a>.</p>
+<h2 id="files">Files and Directories</h2><p>Now lets look through the contents of your site directory:</p>
+
+
+<div class="break def-table">
+    <table class="pure-table">
+        <tbody>
+        <tr><td class="tinted"><a href="#files-build">build/</a></td><td class="">Output directory. <small>Stark will create it if it is missing.</small></td></tr><tr><td class="tinted"><a href="#files-index">index.mpc</a></td><td class="">Home page. Starting point. <small>Required.</small></td></tr><tr><td class="tinted"><a href="#files-config">config.mpc</a></td><td class="">Site-wide configuration. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-lib">lib/</a></td><td class="">Components directory. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-pages">pages/</a></td><td class="">Pages directory. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-static">static/</a></td><td class="">Static files directory. <small>Optional.</small></td></tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 id="files-build">build/</h4>
+
+<p>You will find the compiled pages, scripts, styles and other files here. Directory contents may look like this:</p>
+
+
+<div class="break def-table">
+    <table class="pure-table">
+        <tbody>
+        <tr><td class="tinted">index.html</td><td class="">Home page created from index.mpc</td></tr><tr><td class="tinted">style.css</td><td class="">CSS style built from requirements of index.mpc</td></tr><tr><td class="tinted">script.js</td><td class="">JavaScript modules build from requirements of index.mpc</td></tr><tr><td class="tinted">static/</td><td class="">Files copied over from static/</td></tr><tr><td class="tinted">somepage/ index.html</td><td class="">Page created from pages/somepage.mpc</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<h3 id="files-index">index.mpc</h4>
+
+<p>This is the main page of the site.</p>
+
+
+
+    </div>
+
+    <div class="footer-spacer"></div>
+<footer id="footer">
+    <ul>
+        <li><a href="#"><b>Top</b></a></li>
+        <li><a href="#quickstark">Quick Start</a></li><li><a href="#files">Files and Directories</a></li>
+    </ul>
+</footer>
+
+</main>
+</div>
+
+
+    <script>
+        document.body.htmlDone =    true;
+        var event = document.createEvent('Event');
+        event.initEvent( "html-done", true, true );
+        document.dispatchEvent( event );
+    </script>
+    
+</body>
+</html>
