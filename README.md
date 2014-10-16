@@ -2,17 +2,24 @@
 
 **Status:** This is a work in progress. A lot of rough edges. Also don't expect much backwards compatibility between versions.
 
-## Installation
+## Quick Start
+
+Run this in your terminal:
 
 ```bash
 $ npm install -g stark
+$ stark new yoursite
+$ cd yoursite
+$ stark serve
 ```
 
-### Usage in command line
+Then open the printed link in your browser (usually it's <http://localhost:7780>). You should see a page like this:
 
-```bash
-$ stark
-```
+<img src="http://emilis.github.io/stark/static/success.png" alt="Success" width="50%">
+
+## Full Documentation
+
+For more info [go to Stark website][docs].
 
 ##  Contributing
 
@@ -30,4 +37,5 @@ This is free software, and you are welcome to redistribute it under certain cond
 
 _May we introduce you to Stark. Oh and by the way – good luck..._
 
-[issues]: https://github.com/emilis/stark/issues
+[issues]:   https://github.com/emilis/stark/issues
+[docs]:     http://emilis.github.io/stark
