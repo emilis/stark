@@ -7,19 +7,19 @@
 Run this in your terminal:
 
 ```bash
-$ npm install -g stark
-$ stark new yoursite
-$ cd yoursite
-$ stark serve
+npm install -g stark
+stark new yoursite
+cd yoursite
+stark serve
 ```
 
 Then open the printed link in your browser (usually it's <http://localhost:7780>). You should see a page like this:
 
-<img src="http://emilis.github.io/stark/static/success.png" alt="Success" width="50%">
+<img src="http://emilis.github.io/stark/static/success.png" alt="Success" width="50%" align="center">
 
 ## Full Documentation
 
-For more info [go to Stark website][docs].
+For more info **[go to Stark website »][docs]**.
 
 ##  Contributing
 
