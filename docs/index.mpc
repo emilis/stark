@@ -6,6 +6,7 @@ pager:              lib/stark/pager
 quickstart:         pages/quickstart
 download:           pages/download
 files:              pages/files
+contributing:       pages/contributing
 
 --- yaml -----------------------------------------------------------------------
 
@@ -27,4 +28,5 @@ image:              /static/logo.png
         pages: [
                     quickstart,
                     files,
+                    contributing,
         ]}) %>
