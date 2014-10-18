@@ -1,3 +1,47 @@
+.with-hide-menu {
+  height: 100%;
+}
+.with-hide-menu,
+.with-hide-menu > .menu {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.with-hide-menu > .menu {
+  margin-left: -12em;
+  width: 12em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 48em) {
+  .with-hide-menu {
+    /*
+        > main {
+            margin-top:     0;
+        }
+        */
+  }
+  .with-hide-menu > .menu {
+    background: #333;
+    color: #fff;
+  }
+}
+@media (min-width: 48em) {
+  .with-hide-menu {
+    padding-left: 12em;
+    left: 0;
+  }
+  .with-hide-menu > .menu {
+    left: 12em;
+    background: transparent none;
+  }
+}
 /*!
 Pure v0.5.0
 Copyright 2014 Yahoo! Inc. All rights reserved.
@@ -1320,88 +1364,6 @@ pre {
     border-radius: 0;
   }
 }
-.stark-menu {
-  position: relative;
-  min-height: 100%;
-  padding: 2em 0;
-  box-sizing: border-box;
-  background: #c8d7cf;
-  color: #000000;
-  overflow-x: hidden;
-  white-space: nowrap;
-}
-.stark-menu > ul {
-  display: block;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.stark-menu > ul > li {
-  display: block;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.stark-menu > ul > li > a {
-  display: block;
-  padding: 0.25em 1em;
-  text-decoration: none;
-  color: #000000;
-  border: 0 none transparent;
-  /*
-                &:hover {
-                    background:     @graydd;
-                    border-color:   @grayee;
-                }
-                */
-}
-.stark-menu > ul > li > a:hover {
-  background: transparent;
-}
-.with-hide-menu {
-  height: 100%;
-}
-.with-hide-menu,
-.with-hide-menu > .menu {
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  -ms-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  transition: all 0.2s ease-out;
-}
-.with-hide-menu > .menu {
-  margin-left: -12em;
-  width: 12em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-@media (max-width: 48em) {
-  .with-hide-menu {
-    /*
-        > main {
-            margin-top:     0;
-        }
-        */
-  }
-  .with-hide-menu > .menu {
-    background: #333;
-    color: #fff;
-  }
-}
-@media (min-width: 48em) {
-  .with-hide-menu {
-    padding-left: 12em;
-    left: 0;
-  }
-  .with-hide-menu > .menu {
-    left: 12em;
-    background: transparent none;
-  }
-}
 #main {
   position: relative;
   min-height: 100%;
@@ -1485,6 +1447,44 @@ pre {
     padding-left: 1em;
     padding-right: 1em;
   }
+}
+.stark-menu {
+  position: relative;
+  min-height: 100%;
+  padding: 2em 0;
+  box-sizing: border-box;
+  background: #c8d7cf;
+  color: #000000;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+.stark-menu > ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stark-menu > ul > li {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stark-menu > ul > li > a {
+  display: block;
+  padding: 0.25em 1em;
+  text-decoration: none;
+  color: #000000;
+  border: 0 none transparent;
+  /*
+                &:hover {
+                    background:     @graydd;
+                    border-color:   @grayee;
+                }
+                */
+}
+.stark-menu > ul > li > a:hover {
+  background: transparent;
 }
 main > .footer-spacer {
   clear: both;
@@ -1572,6 +1572,13 @@ code.unselectable {
 }
 .shell-code > code.unselectable {
   color: #778a85;
+}
+.screenshot {
+  text-align: center;
+}
+.screenshot > img {
+  width: 320px;
+  max-width: 100%;
 }
 .break.def-table > .pure-table {
   border: 0 none transparent;
