@@ -1,4 +1,4 @@
-#   Stark – MPC compiler for the Web
+#   Stark – MPC compiler for the Web [<img src="http://emilis.github.io/stark/static/logo.png" alt="Stark" height="46" align="right">][docs]
 
 **Status:** This is a work in progress. A lot of rough edges. Also don't expect much backwards compatibility between versions.
 
