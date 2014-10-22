@@ -10,7 +10,7 @@ pages:                  []
 
 <div class="stark-menu">
     <ul>
-        <li><a href="#"><b>Stark</b></a></li>
+        <li><a href="#"><b>STARK(»)</b></a></li>
         <% pages.forEach( showLink ) %>
     </ul>
 </div>
