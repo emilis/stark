@@ -10,8 +10,8 @@
   transition: all 0.2s ease-out;
 }
 .with-hide-menu > .menu {
-  margin-left: -12em;
-  width: 12em;
+  margin-left: -14em;
+  width: 14em;
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-@media (max-width: 48em) {
+@media (max-width: 50em) {
   .with-hide-menu {
     /*
         > main {
@@ -32,13 +32,13 @@
     color: #fff;
   }
 }
-@media (min-width: 48em) {
+@media (min-width: 50em) {
   .with-hide-menu {
-    padding-left: 12em;
+    padding-left: 14em;
     left: 0;
   }
   .with-hide-menu > .menu {
-    left: 12em;
+    left: 14em;
     background: transparent none;
   }
 }
@@ -1345,7 +1345,7 @@ pre {
 #main > a.break:focus {
   border-bottom-color: #2b65a4;
 }
-@media (max-width: 48em) {
+@media (max-width: 50em) {
   body {
     background: #ffffff;
   }
@@ -1404,7 +1404,7 @@ pre {
 #main.no-header > .header {
   display: none;
 }
-@media (min-width: 48em) {
+@media (min-width: 50em) {
   #main > .break,
   #main > .content,
   #main > .header {
@@ -1426,7 +1426,7 @@ pre {
     padding-right: 2em;
   }
 }
-@media (max-width: 48em) {
+@media (max-width: 50em) {
   #main > .break,
   #main > .content,
   #main > .header {
@@ -1544,7 +1544,7 @@ main > footer#footer > ul,
 main > footer#footer > p {
   margin-bottom: 1em;
 }
-@media (max-width: 48em) {
+@media (max-width: 50em) {
   main > .footer-spacer {
     height: 30em;
   }
