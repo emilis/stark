@@ -17,9 +17,9 @@ image:              /static/logo.png
 
 <p><img src="static/logo.png" alt="Stark"></p>
 
-<!--<hr class="break">-->
+<p>Stark lets you build <b>complex</b> static websites and single-page applications <b>easily</b>.</p>
 
-<p>Stark is a multi-part component compiler for the Web. You can build static websites and single-page applications with Stark.</p>
+<p>It generates sites from <b>components</b> in a special syntax that is exceptionally <b>readable</b>, easy to write and naturally leads to <b>simpler</b> code.</p>
 
 --- jst ------------------------------------------------------------------------
 
