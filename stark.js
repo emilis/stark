@@ -23,14 +23,16 @@ module.exports = {
 
 function compileCss( src, dest ){
 
+    var partNames =     [ "less", "css" ];
+
     var components =    mpc.parseComponent( src, {
         all:            true,
         recursive:      true,
         sort:           true,
-        parts:          [ "css", "less" ],
+        parts:          partNames,
     }).filter( isNotComponent( src ));
 
-    var content =       components.map( getPartContent([ "css", "less" ])).join( "\n" );
+    var content =       components.map( getCssContent ).join( "\n" );
 
     return less.render( content, onCss );
 
@@ -41,7 +43,12 @@ function compileCss( src, dest ){
         } else {
             fs.writeFile( dest, css );
         }
-    }
+    }///
+
+    function getCssContent( component ){
+
+        return mpc.findPartContent( component, partNames );
+    }///
 }///
 
 
@@ -160,19 +167,6 @@ function compilePages( src, dest ){
 }///
 
 /// Private functions ----------------------------------------------------------
-
-function getPartContent( parts ){
-    return function( component ){
-
-        for ( var i=0, len=component.parts.length; i<len; i++ ){
-            if ( -1 !== parts.indexOf( component.parts[i].partName )){
-                return component.parts[i].content;
-            }
-        }
-        return "";
-    };//
-}///
-
 
 function isNotComponent( name ){
     return function( component ){
