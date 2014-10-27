@@ -1,177 +1,172 @@
 /// Requirements ---------------------------------------------------------------
 
 var fs =                require( "fs" );
-var less =              require( "less" );
-var mpc =               require( "mpc" );
 var mkdirp =            require( "mkdirp" );
+var ncp =               require( "ncp" );
 var path =              require( "path" );
+var rimraf =            require( "rimraf" );
 
+var mpc =               require( "mpc" );
+
+var siteComponent =     require( "./lib/site-component" );
+var cssCompiler =       require( "./lib/compilers/css" );
 var jsCompiler =        require( "./lib/compilers/js" );
 var pageCompiler =      require( "./lib/compilers/pages" );
 
 /// Exports --------------------------------------------------------------------
 
 module.exports = {
-    compileCss:         compileCss,
-    compileJs:          compileJs,
     compileSite:        compileSite,
-    compilePage:        compilePage,
-    compilePages:       compilePages,
 };
 
 /// Functions ------------------------------------------------------------------
 
-function compileCss( src, dest ){
-
-    var partNames =     [ "less", "css" ];
-
-    var components =    mpc.parseComponent( src, {
-        all:            true,
-        recursive:      true,
-        sort:           true,
-        parts:          partNames,
-    }).filter( isNotComponent( src ));
-
-    var content =       components.map( getCssContent ).join( "\n" );
-
-    return less.render( content, onCss );
-
-    function onCss( e, css ){
-
-        if ( e ){
-            console.error( "stark.compileCss error:", e );
-        } else {
-            fs.writeFile( dest, css );
-        }
-    }///
-
-    function getCssContent( component ){
-
-        return mpc.findPartContent( component, partNames );
-    }///
-}///
-
-
-function compileJs( src, dest ){
-
-    var components =    mpc.parseComponent( src, {
-        all:            true,
-        recursive:      true,
-        sort:           true,
-        parts:          [ "js" ],
-    }).filter( isNotComponent( src ));
-
-    return fs.writeFile( dest, jsCompiler.compile( components ));
-}///
-
-
 function compileSite( src, dest ){
 
-    src =                       path.resolve( src );
-    dest =                      path.resolve( dest );
+    src =               path.resolve( src );
+    dest =              path.resolve( dest );
 
-    var indexPath =             src + "/index";
-    var configPath =            src + "/config";
-    var pagesPath =             src + "/pages";
+    /// Make an empty build directory:
+    fs.existsSync( dest ) && rimraf.sync( dest );
+    mkdirp.sync( dest );
 
-    var config =                mpc.parseComponent( configPath, {
-        all:                    true,
-        fillRequirements:       true,
-    })[ 0 ];
+    /// Create Site component constructor:
+    var getSiteComponent =  siteComponent.bind( this, src, {} );
 
-    var index =                 mpc.parseComponent( indexPath, {
-        all:                    true,
-        fillRequirements:       true,
-    });
+    /// Read configuration:
+    var config =        getConfig( src + "/config", getSiteComponent );
+    config.SRC =        src;
+    config.DEST =       dest;
+    config.pages =      config.pages || src + "/pages";
 
-    if ( fs.existsSync( pagesPath )){
-        var pages =             mpc.parseDir( pagesPath, {
-            all:                true,
-            fillRequirements:   true,
-        });
-    } else {
-        var pages =             [];
-    }
+    /// Create static directory
+    mkdirp( dest + "/static" );
 
-    var site = {
-        sourceDir:              src,
-        buildDir:               dest,
-        config:                 config && pageCompiler.getYaml( config ) || {},
-        pages:                  index.concat( pages ),
+    copyStatic(
+        src + "/static",
+        dest + "/static",
+        config );
+
+    compileCss(
+        src + "/index",
+        dest + "/static/style.css",
+        config, getSiteComponent );
+
+    compileJs(
+        src + "/index",
+        dest + "/static/script.js",
+        config, getSiteComponent );
+
+    compilePages(
+        src + "/index",
+        config.pages,
+        dest,
+        config, getSiteComponent );
+}///
+
+
+function getConfig( fullPath, getSiteComponent ){
+
+    var mpcOptions = {
+        all:                true,
+        fillRequirements:   true,
     };
 
-    site.pages.map( compileSitePage ).forEach( saveSitePage );
+    var components =    mpc.parseComponent( fullPath, mpcOptions );
+
+    if ( !components.length ){
+        return {};
+    } else {
+        console.log( components );
+        return getSiteComponent( components[0] );
+    }
+}///
 
 
-    function compileSitePage( component ){
+function copyStatic( src, dest, config ){
 
-        return pageCompiler.compilePage( component, site );
-    }///
+    return fs.existsSync( src ) && ncp.ncp( src, dest );
+}///
 
-    function saveSitePage( page ){
 
-        var dirName;
-        var fileName;
+function compileCss( indexName, fileName, config, getSiteComponent ){
 
-        if ( page.permalink ){
-            fileName =          dest + "/" + page.permalink;
-            dirName =           path.dirname( fileName );
-        } else if ( page.name === indexPath ){
-            dirName =           dest;
-            fileName =          dirName + "/index.html";
+    var mpcOptions = {
+        all:            true,
+        recursive:      true,
+        sort:           true,
+        parts:          cssCompiler.partNames,
+    };
+
+    cssCompiler.compileComponents(
+        config,
+        mpc.parseComponent( indexName, mpcOptions )
+            .filter( isNotComponent( indexName ))
+            .map( getSiteComponent ),
+        saveCss
+    );
+
+    function saveCss( err, content ){
+
+        if ( err ){
+            console.error( "stark.compileCss error:", err );
         } else {
-            dirName =           page.name.replace( pagesPath, dest );
-            fileName =          dirName + "/index.html";
+            fs.writeFile( fileName, content );
         }
+    }///
+}///
+
+
+function compileJs( indexName, fileName, config, getSiteComponent ){
+
+    var mpcOptions = {
+        all:            true,
+        recursive:      true,
+        sort:           true,
+        parts:          jsCompiler.partNames,
+    };
+
+    return fs.writeFileSync( fileName,
+        jsCompiler.compileComponents(
+            config,
+            mpc.parseComponent( indexName, mpcOptions )
+                .filter( isNotComponent( indexName ))
+                .map( getSiteComponent )
+        )
+    );
+}///
+
+
+function compilePages( indexName, pageDir, dest, config, getSiteComponent ){
+
+    var mpcOptions = {
+        all:                true,
+        fillRequirements:   true,
+    };
+
+    var components = [].concat(
+            mpc.parseComponent( indexName, mpcOptions ),
+            mpc.parseDir( pageDir, mpcOptions )
+        ).map( getSiteComponent );
+
+    pageCompiler.compileComponents( config, components ).forEach( savePage );
+            
+    function savePage( page ){
+
+        var fileName =      dest + page.permalink;
+        var dirName =       path.dirname( fileName );
 
         mkdirp.sync( dirName );
-        return fs.writeFile( fileName, page.content );
-    }///
-}///
-
-
-function compilePage( src, dest ){
-
-    var component =         mpc.parseComponent( src, {
-        all:                true,
-        fillRequirements:   true,
-    })[0];
-
-    var page =              pageCompiler.compilePage( component );
-
-    return fs.writeFile( dest, page.content );
-}///
-
-function compilePages( src, dest ){
-
-    var components =        mpc.parseDir( src, {
-        all:                true,
-        fillRequirements:   true,
-    });
-
-    var pages =             pageCompiler.compile( components );
-
-    pages.forEach( savePage( src, dest ));
-
-    function savePage( src, dest ){
-        return function( page ){
-
-            var dirName =   page.name.replace( src, dest );
-            var fileName =  dirName + "/index.html";
-
-            mkdirp.sync( dirName );
-
-            return fs.writeFile( fileName, page.content );
-        };//
+        fs.writeFile( dest + page.permalink, page.fullContent );
     }///
 }///
 
 /// Private functions ----------------------------------------------------------
 
 function isNotComponent( name ){
-    return function( component ){
+    return function( mpcComponent ){
 
-        return component.name !== name;
+        return mpcComponent.name !== name;
     };//
 }///
 
