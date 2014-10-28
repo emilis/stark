@@ -1,24 +1,23 @@
 --- jst ------------------------------------------------------------------------
 
-<div class="screen-frame">
+<div class="<%- CLASSNAME %>">
     <img src="<%- img %>" alt="<%- alt %>">
     <%= text %>
 </div>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.screen-frame {
+{SELECTOR}
 
-    border:         1em ridge #333;
-    padding:        0.5em;
-    text-align:     left;
+    border          1em ridge #333
+    padding         0.5em
+    text-align      left
 
-    background:     #000;
-    color:          #0c0;
+    background      #000
+    color           #0c0
 
-    > img {
-            display:    block;
-            margin:     1em auto;
-            max-width:  100%;
-    }
-}
+    > img 
+
+        display     block
+        margin      1em auto
+        max-width   100%

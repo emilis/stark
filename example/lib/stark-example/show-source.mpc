@@ -8,47 +8,53 @@ label:                      Show source
 
 --- jst ------------------------------------------------------------------------
 
-<div class="show-source">
+<div class="<%- CLASSNAME %>">
     <a class="toggle-on"><%- label %> [+]</a>
-    <a class="toggle-off" style="display: none"><%- component.componentName %>.mpc [–]</a>
+    <a class="toggle-off" style="display: none"><%- component.fullPath %>.mpc [–]</a>
     <div class="code">
         <pre><%
-            for ( var name in component.parts ){
-                %><b>--- <%- name %> --------------------------------------</b>
-
-<%- component.parts[name] %>
-
-<%
-            }
+            component.parts.forEach( showPart );
         %></pre>
     </div>
 </div>
+<%
 
---- less -----------------------------------------------------------------------
+function showPart( part ){
 
-.show-source {
+    %><b>--- <%- part.partName %> -------------------------------------</b>
 
-    clear:                  both;
-    border:                 1px solid #ccc;
+<%- part.content %>
+
+<%
+}
+
+%>
+
+--- styl -----------------------------------------------------------------------
+
+{SELECTOR}
+
+    clear                   both
+    border                  1px solid #ccc
 
     > .toggle-on,
-    > .toggle-off {
+    > .toggle-off 
         
-        display:            block;
-        padding:            0.5em 1em;
+        display             block
+        padding             0.5em 1em
         
-        color:              #999;
-        text-decoration:    underline;
-        cursor:             pointer;
-    }
+        color               #999
+        text-decoration     underline
+        cursor              pointer
+    
 
-    pre {
+    pre 
 
-        margin:             0;
-        background-color:   #eee;
-        white-space:        pre-wrap;
-    }
-}
+        margin              0
+        background-color    #eee
+        white-space         pre-wrap
+    
+
 
 --- js -------------------------------------------------------------------------
 
@@ -56,7 +62,7 @@ $( init );
 
 function init(){
 
-    $( ".show-source" ).forEach( initElement );
+    $( SELECTOR ).forEach( initElement );
 }///
 
 

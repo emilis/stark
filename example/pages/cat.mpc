@@ -61,7 +61,7 @@ buttonArgs:
 <p>This is the end of this intro.</p>
 
 <ul>
-    <li><p>You should go inspect the source code for this site. It is located at <tt><%= dirname( dirname( componentName )) %></tt>.</p></li>
+    <li><p>You should go inspect the source code for this site. It is located at <tt><%= dirname( dirname( fullPath )) %></tt>.</p></li>
     <li><p>Or go read the full Stark manual.</p></li>
 </ul>
 

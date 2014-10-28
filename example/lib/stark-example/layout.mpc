@@ -6,8 +6,8 @@ theme
 
 --- jst ------------------------------------------------------------------------
 
-<div class="layout">
-    <h1><%- page.yaml.title %></h1>
+<div class="<%- CLASSNAME %>">
+    <h1><%- page.title %></h1>
     <%= content %>
     <div id="page-source">
         <%= showSource({
@@ -17,13 +17,12 @@ theme
     </div>
 </div>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.layout {
+{SELECTOR}
 
-    padding:        2em;
+    padding         2em
 
-    > h1:first-child {
-        margin-top: 0;
-    }
-}
+    > h1:first-child 
+
+        margin-top  0

@@ -19,11 +19,13 @@ messages:
 --- jst ------------------------------------------------------------------------
 
 <%
+
 var href=   url ? 'href="'+url+'"' : "";
+
 %>
-<div class="teh-button-placeholder">
-    <div class="teh-button" data-messages="<%- JSON.stringify( messages ) %>">
-        <a class="button" <%= href %>><%- label %></a>
+<div class="<%- CLASSNAME %>-placeholder">
+    <div class="<%- CLASSNAME %>" data-messages="<%- JSON.stringify( messages ) %>">
+        <a class="button" <%- href %>><%- label %></a>
     </div>
 </div>
 
@@ -33,7 +35,7 @@ $( init );
 
 function init(){
 
-    $( ".teh-button" ).forEach( initButton );
+    $( SELECTOR ).forEach( initButton );
 }///
 
 function initButton( div ){
@@ -91,40 +93,37 @@ function getOppositePos( $div, evt ){
     };
 }///
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.teh-button-placeholder {
+{SELECTOR}-placeholder 
 
-    height:                 6em;
-}
+    height                  6em
 
-.teh-button {
+{SELECTOR}
 
-    padding:                2em;
-    z-index:                9001;
+    padding                 2em
+    z-index                 9001
 
-    > .button {
+    > .button 
 
-        padding:            0.5em;
-        border:             2px outset green;
-        border-radius:      10px;
-        white-space:        nowrap;
-        cursor:             pointer;
+        padding             0.5em
+        border              2px outset green
+        border-radius       10px
+        white-space         nowrap
+        cursor              pointer
 
-        background:         green;
-        color:              white;
+        background          green
+        color               white
 
-        font-size:          150%;
-        font-weight:        bold;
-        text-decoration:    none;
+        font-size           150%
+        font-weight         bold
+        text-decoration     none
 
-        &:hover {
-            border-width:   0;
-        }
-    }
+        &:hover 
 
-    &.hot > .button {
-        border-color:       orange;
-        background-color:   orange;
-    }
-}
+            border-width    0
+
+    &.hot > .button 
+
+        border-color        orange
+        background-color    orange

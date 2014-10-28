@@ -1,33 +1,33 @@
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-html {
+html 
     
-    height:         100%;
-    margin:         0;
-    padding:        0;
+    height          100%
+    margin          0
+    padding         0
 
-    background:     lightGray;
-    background:     Menu;
-    background:     ThreeDFace;
-}
+    background      lightGray
+    background      Menu
+    background      ThreeDFace
 
-body {
 
-    min-height:     100%;
-    max-width:      48em;
-    margin:         0 auto;
+body 
 
-    background:     white;
-    box-shadow:     0 0 1em #333;
-}
+    min-height      100%
+    max-width       48em
+    margin          0 auto
 
-html, body {
+    background      white
+    box-shadow      0 0 1em #333
+
+
+html, body 
     
-    font-family:    Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size:      110%;
-}
+    font-family     Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif
+    font-size       110%
 
-small {
 
-    color:          #999;
-}
+small 
+
+    color           #999
+
