@@ -77,7 +77,6 @@ function getConfig( fullPath, getSiteComponent ){
     if ( !components.length ){
         return {};
     } else {
-        console.log( components );
         return getSiteComponent( components[0] );
     }
 }///
