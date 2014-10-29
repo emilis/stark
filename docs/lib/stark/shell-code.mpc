@@ -1,10 +1,14 @@
+--- requirements ---------------------------------------------------------------
+
+../../config
+
 --- jst ------------------------------------------------------------------------
 
 <%
 
 var csv =       content.split( "\n" ).map( splitRow );
 
-%><pre class="shell-code"><%
+%><pre class="<%- CLASSNAME %>"><%
 
     for ( var r=0; r<csv.length; r++ ){
 
@@ -28,21 +32,19 @@ function trim( str ){
 
 %>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-code.unselectable {
+code.unselectable  
     
-    -moz-user-select:       none;
-    -webkit-user-select:    none;
-    -ms-user-select:        none;
-}
+    -moz-user-select    none 
+    -webkit-user-select none 
+    -ms-user-select     none 
+ 
 
-.shell-code > code {
+{SELECTOR} > code
 
-    color:                  @white;
+    color               $white 
 
-    &.unselectable {
+    &.unselectable  
 
-        color:              @gray99;
-    }
-}
+        color           $gray99 

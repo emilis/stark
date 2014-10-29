@@ -1,5 +1,6 @@
 --- requirements ---------------------------------------------------------------
 
+../../config
 theme
 
 --- yaml -----------------------------------------------------------------------
@@ -13,7 +14,12 @@ footer:             No footer content provided
 
 --- jst ------------------------------------------------------------------------
 
-<main id="main" class="<%- noHeader ? "no-header" : "" %>">
+<%
+
+noHeader =          noHeader ? "no-header" : "";
+
+%>
+<main id="main" class="<%- CLASSNAME %> <%- noHeader %>">
     <header class="header">
         <% if ( !noHeader ){ %>
         <h1><%- title %></h1>
@@ -34,98 +40,90 @@ footer:             No footer content provided
     <%= footer %>
 </main>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-#main {
+{SELECTOR}
 
-    position:               relative;
-    min-height:             100%;
-    max-width:              @wContentMax;
-    margin-top:             0;
-    margin-bottom:          0;
-    border-radius:          0;
+    position                    relative 
+    min-height                  100% 
+    max-width                   $wContentMax 
+    margin-top                  0 
+    margin-bottom               0 
+    border-radius               0 
 
-    background:             @white;
-    border-top:             1em solid @white;
-    box-sizing:             border-box;
-    box-shadow:             0 0 2em @gray66;
-    z-index:                2;
+    background                  $white 
+    border-top                  1em solid $white 
+    box-sizing                  border-box 
+    box-shadow                  0 0 2em $gray66 
+    z-index                     2 
 
-    > .header {
-        margin:             0;
-        color:              @gray0;
-        text-align:         center;
-        padding:            2.5em 2em 0;
-        border-bottom:      1px solid @coleee;
+    > .header  
 
-        > h1 {
-            margin:         0.2em 0;
-            font-size:      3em;
-            font-weight:    300;
-            line-height:    100%;
-        }
+        margin                  0 
+        color                   $gray0 
+        text-align              center 
+        padding                 2.5em 2em 0 
+        border-bottom           1px solid $coleee 
+
+        > h1  
+
+            margin              0.2em 0 
+            font-size           3em 
+            font-weight         300 
+            line-height         100% 
+         
         
-        > h2 {
-            font-weight:    300;
-            color:          @col999;
-            padding:        0;
-            margin-top:     0;
-        }
-    }
-    
-    > .content {
-        margin:             0 auto;
-        margin-bottom:      50px;
-        line-height:        1.6em;
-    }
+        > h2
 
-    &.no-header {
-        > .header {
-            display:        none;
-        }
-    }
-}
+            font-weight         300 
+            color               $col999 
+            padding             0 
+            margin-top          0 
+         
+    > .content  
 
-/// Responsive -----------------------------------------------------------------
+        margin                  0 auto 
+        margin-bottom           50px 
+        line-height             1.6em 
 
-@media (min-width: @wMobile) {
+    &.no-header  
 
-    #main {
+        > .header  
+
+            display             none 
+
+    @media $WIDE
+         
         > .break,
         > .content,
-        > .header {
-            padding-left:       2em;
-            padding-right:      2em;
+        > .header  
+
+            padding-left        2em 
+            padding-right       2em 
 
             > pre,
             > .break,
-            > .full-width {
-                margin-left:    -2em;
-                margin-right:   -2em;
-                padding-left:   2em;
-                padding-right:  2em;
-            }
-        }
-    }
-}
+            > .full-width  
 
-@media (max-width: @wMobile) {
+                margin-left     -2em 
+                margin-right    -2em 
+                padding-left    2em 
+                padding-right   2em
 
-    #main {
+    @media $MOBILE
+     
         > .break,
         > .content,
-        > .header {
-            padding-left:       1em;
-            padding-right:      1em;
+        > .header  
+
+            padding-left        1em 
+            padding-right       1em 
 
             > pre,
             > .break,
-            > .full-width {
-                margin-left:    -1em;
-                margin-right:   -1em;
-                padding-left:   1em;
-                padding-right:  1em;
-            }
-        }
-    }
-}
+            > .full-width  
+
+                margin-left     -1em 
+                margin-right    -1em 
+                padding-left    1em 
+                padding-right   1em 

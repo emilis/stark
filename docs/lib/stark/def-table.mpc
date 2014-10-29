@@ -1,3 +1,7 @@
+--- requirements ---------------------------------------------------------------
+
+../../config
+
 --- yaml -----------------------------------------------------------------------
 
 prefix:         def
@@ -19,7 +23,7 @@ function trim( str ){
 }///
 
 %>
-<div class="break def-table">
+<div class="break <%- CLASSNAME %>">
     <table class="pure-table">
         <tbody>
         <%
@@ -48,28 +52,28 @@ function trim( str ){
     </table>
 </div>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.break.def-table {
+{SELECTOR}
 
-    > .pure-table {
+    > .pure-table  
 
-        border:                     0 none transparent;
+        border                  0 none transparent 
 
-        td {
+        td  
             
-            vertical-align:         top;
-            border-color:           @grayee;
-            color:                  #222;
+            vertical-align      top 
+            border-color        $grayee 
+            color               #222 
 
-            &:first-child {
+            &:first-child  
 
-                padding-left:       0;
-            }
-            &:last-child {
+                padding-left    0 
+             
+            &:last-child  
 
-                padding-right:      0;
-            }
-        }
-    }
-}
+                padding-right   0 
+             
+         
+     
+ 

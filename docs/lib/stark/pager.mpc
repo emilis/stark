@@ -21,10 +21,7 @@ print( structure({
 
 function getPageHtml( p ){
 
-    return [].concat(
-        '<h2 id="', p.yaml.id, '">', p.yaml.title, '</h2>',
-        p()
-        ).join( "" );
+    return '<h2 id="' + p.id + '">' + p.title + '</h2>' + p.content;
 }///
 
 %>

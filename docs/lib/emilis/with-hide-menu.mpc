@@ -1,6 +1,10 @@
+--- requirements ---------------------------------------------------------------
+
+../../config
+
 --- jst ------------------------------------------------------------------------
 
-<div class="with-hide-menu">
+<div class="<%- CLASSNAME %>">
     <nav class="menu">
         <%= menu %>
     </nav>
@@ -8,68 +12,45 @@
     <%= content %>
 </div>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-@wMenu:                     12em;
-@wMobile:                   48em;
+{SELECTOR}
 
-.with-hide-menu {
+    height                  100% 
+
+    @media $WIDE
+
+        padding-left        $wMenu 
+        left                0 
 
     &,
-    & > .menu {
-        -webkit-transition: all 0.2s ease-out;
-        -moz-transition:    all 0.2s ease-out;
-        -ms-transition:     all 0.2s ease-out;
-        -o-transition:      all 0.2s ease-out;
-        transition:         all 0.2s ease-out;
-    }
+    & > .menu  
+        -webkit-transition  all 0.2s ease-out 
+        -moz-transition     all 0.2s ease-out 
+        -ms-transition      all 0.2s ease-out 
+        -o-transition       all 0.2s ease-out 
+        transition          all 0.2s ease-out 
+     
 
-    height:                 100%;
+    > .menu  
 
-    > .menu {
+        margin-left         - $wMenu
+        width               $wMenu 
+        position            fixed 
+        top                 0 
+        left                0 
+        bottom              0 
+        ///z-index             1000  // so the menu or its navicon stays above all content
+        overflow-y          auto 
 
-        margin-left:        -@wMenu;
-        width:              @wMenu;
-        position:           fixed;
-        top:                0;
-        left:               0;
-        bottom:             0;
-        ///z-index:            1000; // so the menu or its navicon stays above all content
-        overflow-y:         auto;
+        -webkit-overflow-scrolling  touch 
 
-        -webkit-overflow-scrolling: touch;
-    }
-}
+        @media $MOBILE
 
-/// Responsive -----------------------------------------------------------------
+            background      #333
+            color           #fff
 
-/// Narrow:
-@media ( max-width: @wMobile ){
+        @media $WIDE
 
-    .with-hide-menu {
-        > .menu {
-            background:     #333;
-            color:          #fff;
-        }
-
-        /*
-        > main {
-            margin-top:     0;
-        }
-        */
-    }
-}
-
-/// Wide:
-@media ( min-width: @wMobile ){
-
-    .with-hide-menu {
-        padding-left:   @wMenu;
-        left:           0;
-        
-        > .menu {
-            left:           @wMenu;
-            background:     transparent none;
-        }
-    }
-}
+            left            $wMenu
+            background      transparent none

@@ -1,7 +1,11 @@
+--- requirements ---------------------------------------------------------------
+
+theme
+
 --- jst ------------------------------------------------------------------------
 
-<div class="footer-spacer"></div>
-<footer id="footer">
+<div class="<%- CLASSNAME %>-spacer"></div>
+<footer class="<%- CLASSNAME %>">
     <ul>
         <li><a href="#"><b>Top</b></a></li>
         <% pages.forEach( showLink ) %>
@@ -11,104 +15,89 @@
 
 function showLink( p ){
 
-    %><li><a href="#<%- p.yaml.id %>"><%- p.yaml.title %></a></li><%
+    %><li><a href="#<%- p.id %>"><%- p.title %></a></li><%
 }///
 
 %>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
+{SELECTOR}-spacer
 
-main {
+    clear                   both 
+    height                  21em 
 
-    > .footer-spacer {
-        clear:      both;
-        height:     21em;
-    }
+    @media $MOBILE
 
-    > footer#footer {
+        height              30em
+     
+{SELECTOR}
 
-        position:       absolute;
-        clear:          both;
-        bottom:         0;
-        left:           0;
-        right:          0;
-        .gray-back();
-        padding:        2em 2em 1em;
-        margin-top:     3em;
-        border-top:     5px solid @col999;
-        border-bottom:  0 none transparent;
-        border-radius:  0 0 @borderRadius @borderRadius;
+    position                absolute 
+    clear                   both 
+    bottom                  0 
+    left                    0 
+    right                   0 
+    gray-back()
+    padding                 2em 2em 1em 
+    margin-top              3em 
+    border-top              5px solid $col999 
+    border-bottom           0 none transparent 
+    border-radius           0 0 $borderRadius $borderRadius 
 
-        > a.pure-menu-heading,
-        > ul {
-            display:    block;
-            float:      left;
-        }
+    @media $MOBILE
 
-        > ul,
-        > ul > li {
-            margin:     0;
-            padding:    0;
-            list-style: none;
-        }
-        > ul > li {
-            display:            inline;
-        }
+        padding-left        1em 
+        padding-right       1em 
 
-        a,
-        > a.pure-menu-heading {
-            display:            inline-block;
-            text-decoration:    none;
-            text-transform:     none;
-            font-size:          100%;
-            line-height:        1.5em;
-            margin:             0 0.5em 0 -0.5em;
-            padding:            0.2em 0.5em;
-            border-bottom-width:    1px;
-        }
-        > a.pure-menu-heading:hover {
-            border-bottom:      1px solid transparent;
-        }
+    @media $LOWHEIGHT
 
-        > .pure-menu-heading {
-            clear:              left;
-            width:              9em;
-            font-weight:        bold;
-            color:              @gray99;
-        }
+        border-radius       0
 
-        > ul,
-        > p {
-            margin-bottom:      1em;
-        }
-    }
-}
+    > a.pure-menu-heading,
+    > ul  
 
-@media( max-width: @wMobile ){
+        display             block 
+        float               left 
 
-    main {
+    > ul,
+    > ul > li  
 
-        > .footer-spacer {
-            height:         30em;
-        }
-    
-        > footer#footer {
-            padding-left:   1em;
-            padding-right:  1em;
+        margin              0 
+        padding             0 
+        list-style          none 
+     
+    > ul > li  
 
-            > ul,
-            > p {
-                margin-bottom:  0.5em;
-            }
-        }
-    }
-}
+        display             inline 
 
-@media ( max-height: @hHigh ){
+    a,
+    > a.pure-menu-heading  
 
-    main > footer#footer {
-        border-radius:  0;
-    }
-}
+        display             inline-block 
+        text-decoration     none 
+        text-transform      none 
+        font-size           100% 
+        line-height         1.5em 
+        margin              0 0.5em 0 -0.5em 
+        padding             0.2em 0.5em 
+        border-bottom-width 1px 
+     
+    > a.pure-menu-heading:hover  
 
+        border-bottom       1px solid transparent 
+
+    > .pure-menu-heading  
+
+        clear               left 
+        width               9em 
+        font-weight         bold 
+        color               $gray99 
+
+    > ul,
+    > p  
+        margin-bottom       1em 
+
+        @media $MOBILE
+
+            margin-bottom   0.5em

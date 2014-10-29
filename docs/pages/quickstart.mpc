@@ -25,15 +25,13 @@ openUrl:        http://localhost:7780
 
 <p class="full-width screenshot"><img src="static/success.png" alt="Success"></p>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.screenshot {
+.screenshot 
 
-    text-align:     center;
+    text-align      center
 
-    > img {
+    > img 
         
-        width:      320px;
-        max-width:  100%;
-    }
-}
+        width       320px
+        max-width   100%

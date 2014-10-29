@@ -1,5 +1,6 @@
 --- requirements ---------------------------------------------------------------
 
+../../config
 theme
 
 --- yaml -----------------------------------------------------------------------
@@ -8,7 +9,7 @@ pages:                  []
 
 --- jst ------------------------------------------------------------------------
 
-<div class="stark-menu">
+<div class="<%- CLASSNAME %>">
     <ul>
         <li><a href="#"><b>STARK(»)</b></a></li>
         <% pages.forEach( showLink ) %>
@@ -18,58 +19,48 @@ pages:                  []
 
 function showLink( p ){
 
-    %><li><a href="#<%- p.yaml.id %>"><%- p.yaml.title %></a></li><%
+    %><li><a href="#<%- p.id %>"><%- p.title %></a></li><%
 }///
 
 %>
 
---- less -----------------------------------------------------------------------
+--- styl -----------------------------------------------------------------------
 
-.nolist(){
+nolist()
 
-    display:            block;
-    list-style:         none;
-    padding:            0;
-    margin:             0;
-}
+    display             block 
+    list-style          none 
+    padding             0 
+    margin              0 
 
-.stark-menu {
+{SELECTOR}
 
-    position:           relative;
-    min-height:         100%;
-    padding:            2em 0;
-    box-sizing:         border-box;
-    background:         @graydd;
-    color:              @black;
+    position            relative 
+    min-height          100% 
+    padding             2em 0 
+    box-sizing          border-box 
+    background          $graydd 
+    color               $black 
 
-    overflow-x:         hidden;
-    white-space:        nowrap;
+    overflow-x          hidden 
+    white-space         nowrap 
 
-    > ul {
-        .nolist();
+    > ul  
+        
+        nolist()
 
-        > li {
+        > li  
 
-            .nolist();
+            nolist()
 
-            > a {
-                display:            block;
-                padding:            0.25em 1em; ///0.5em 0 0.5em 1em;
-                text-decoration:    none;
-                color:              @black;
-                border:             0 none transparent;
+            > a
 
-                &:hover {
-                    background:     transparent;
-                }
+                display             block 
+                padding             0.25em 1em  ///0.5em 0 0.5em 1em 
+                text-decoration     none 
+                color               $black 
+                border              0 none transparent 
 
-                /*
-                &:hover {
-                    background:     @graydd;
-                    border-color:   @grayee;
-                }
-                */
-            }
-        }
-    }
-}
+                &:hover  
+
+                    background      transparent 
