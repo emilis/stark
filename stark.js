@@ -143,10 +143,11 @@ function compilePages( indexName, pageDir, dest, config, getSiteComponent ){
         fillRequirements:   true,
     };
 
-    var components = [].concat(
-            mpc.parseComponent( indexName, mpcOptions ),
-            mpc.parseDir( pageDir, mpcOptions )
-        ).map( getSiteComponent );
+    var components =        mpc.parseComponent( indexName, mpcOptions );
+    if ( fs.existsSync( pageDir )){
+        components =        components.concat( mpc.parseDir( pageDir, mpcOptions ));
+    }
+    components =            components.map( getSiteComponent );
 
     pageCompiler.compileComponents( config, components ).forEach( savePage );
             
