@@ -26,9 +26,14 @@ function compileSite( src, dest ){
     src =               path.resolve( src );
     dest =              path.resolve( dest );
 
+
     /// Make an empty build directory:
+    var cwd =           path.resolve( process.cwd() );
     fs.existsSync( dest ) && rimraf.sync( dest );
     mkdirp.sync( dest );
+    if ( cwd === dest ){
+        process.chdir( cwd );
+    }
 
     /// Create Site component constructor:
     var getSiteComponent =  siteComponent.bind( this, src, {} );

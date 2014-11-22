@@ -29,8 +29,10 @@ publish-docs:\
 	cd tmp/gh-pages/ ;\
 		git remote add github git@github.com:emilis/stark.git ;\
 		git pull github gh-pages ;\
-		git rm -rf . ;\
-		stark build -s ../../docs/ -d ./ ;\
+		cd .. ;\
+		git rm -rf gh-pages ;\
+		stark build -s ../docs/ -d gh-pages/ ;\
+		cd gh-pages ;\
 		touch .nojekyll ;\
 		git add . ;\
 		git status ;\
