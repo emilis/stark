@@ -86,6 +86,11 @@ noHeader =          noHeader ? "no-header" : "";
         margin-bottom           50px 
         line-height             1.6em 
 
+        > h2
+
+            padding-top:        1em
+            border-bottom:      1px solid $grayee
+
     &.no-header  
 
         > .header  
