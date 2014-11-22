@@ -20,6 +20,10 @@ publish-patch:\
 
 	npm version patch && $(PUBLISH)
 
+publish-minor:\
+
+	npm version minor && $(PUBLISH)
+
 
 publish-docs:\
 
