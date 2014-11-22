@@ -79,7 +79,7 @@ function getConfig( fullPath, getSiteComponent ){
 
     var components =    mpc.parseComponent( fullPath, mpcOptions );
 
-    if ( !components.length ){
+    if ( !components.length || !components[0] ){
         return {};
     } else {
         return getSiteComponent( components[0] );
