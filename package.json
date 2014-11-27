@@ -23,6 +23,7 @@
     "url": "https://github.com/emilis/stark/blob/master/LICENSE.txt"
   },
   "dependencies": {
+    "chokidar": "^0.11.1",
     "jade": "^1.7.0",
     "lodash": "~2.4.1",
     "marked": "~0.3.2",
