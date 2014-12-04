@@ -5,6 +5,7 @@ var mkdirp =            require( "mkdirp" );
 var ncp =               require( "ncp" );
 var path =              require( "path" );
 var rimraf =            require( "rimraf" );
+var YAML =              require( "yamljs" );
 
 var mpc =               require( "mpc" );
 
@@ -43,6 +44,12 @@ function compileSite( src, dest ){
     config.SRC =        src;
     config.DEST =       dest;
     config.pages =      config.pages || src + "/pages";
+
+    if( config.partMap.compiler ){
+        config.compiler =   YAML.parse( config.partMap.compiler );
+    } else {
+        config.compiler =   {};
+    }
 
     /// Create static directory
     mkdirp( dest + "/static" );
