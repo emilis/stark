@@ -1,13 +1,21 @@
---- requirements ---------------------------------------------------------------
+--- requirements ---
 
 layout:             ../lib/stark-example/layout
 frame:              ../lib/stark-example/screen-frame
 showSource:         ../lib/stark-example/show-source
 button:             ../lib/stark-example/teh-button
 
---- yaml -----------------------------------------------------------------------
+--- yaml ---
 
 title:              How are you gentlemen!!
+
+frameArgs:
+    img:            /static/cat.png
+    alt:            This is a picture of a cat my son drew for me. Has some errors. Just like Stark at the moment
+    text: >
+                    <b>CAT:</b> All your Web are belong to us.<br>
+                    <b>CAT:</b> You are on the way to instruction.
+
 buttonArgs:
     label:          Don't click!
     messages:
@@ -21,87 +29,66 @@ buttonArgs:
         -   OK. have it your way :(
 
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<%= frame({
-    img:        "/static/cat.png",
-    alt:        "This is a picture of a cat my son drew for me. Has some errors. Just like Stark at the moment.",
-    text:       '<b>CAT:</b> All your Web are belong to us.<br><b>CAT:</b> You are on the way to instruction.'
-    }) %>
+!=  frame( frameArgs )
 
-<h2>Now the intro</h2>
+h2 Now the intro
 
-<p>Did you notice the big green button on the previous page? Seemed a little annoying? Here it is again:</p>
+p Did you notice the big green button on the previous page? Seemed a little annoying? Here it is again:
 
-<%= button({
-        label:      buttonArgs.label,
-        messages:   buttonArgs.messages,
-        }) %>
+!=  button( buttonArgs )
 
-<p>Stark generates sites from <em>multi-part components</em> (MPCs). The button is a simple illustration of what these components are and how they work. It is made of HTML, CSS, JavaScript and YAML code. It can be reused in pages and other components. You can see the button's code below:</p>
+p Stark generates sites from <em>multi-part components</em> (MPCs). The button is a simple illustration of what these components are and how they work. It is made of HTML, CSS, JavaScript and YAML code. It can be reused in pages and other components. You can see the button's code below:
 
-<%= showSource({
-    label:      "Show source for the button",
-    component:  button,
-    }) %>
+!=  showSource({ component: button, label: "Show source for the button" })
 
-<p>This component requires <a href="http://zeptojs.com">Zepto.js</a> (a lightweight jQuery alternative) to work. Mixing third-party code with MPCs is very easy: you just put the file in your lib directory and require it just like any other component.</p>
+p This component requires <a href="http://zeptojs.com">Zepto.js</a> (a lightweight jQuery alternative) to work. Mixing third-party code with MPCs is very easy: you just put the file in your lib directory and require it just like any other component.
 
-<p>And here is the source for the "show source" component:</p>
+p And here is the source for the "show source" component:
 
-<%= showSource({
-    label:      "I heard you may like components, so I passed a component as an argument to itself, so that you can...",
-    component:  showSource,
-    }) %>
+!= showSource({ component: showSource, label:      "I heard you may like components, so I passed a component as an argument to itself, so that you can..." })
 
-<p>In Stark pages, templates / layouts are components too. For your convenience I put a "Show source" link at the bottom of every page. <a href="#page-source">Give it a try</a>.</p>
+p In Stark pages, templates / layouts are components too. For your convenience I put a "Show source" link at the bottom of every page. <a href="#page-source">Give it a try</a>.
 
-<hr>
+hr
 
-<p>This is the end of this intro.</p>
+p This is the end of this intro.
 
-<ul>
-    <li><p>You should go inspect the source code for this site. It is located at <tt><%= dirname( dirname( fullPath )) %></tt>.</p></li>
-    <li><p>Or go read the full Stark manual.</p></li>
-</ul>
+ul
+    li: p You should go inspect the source code for this site. It is located at <tt>!{ dirname( dirname( fullPath )) }</tt>.
 
-<hr>
+    li: p Or go read the full Stark manual.
 
-<h2>A small FAQ</h2>
+hr
 
-<h3>Q: So how is it better or worse than other static site generators? [cough *Jekyll* cough]</h3>
-
-<p>First lets give the credit where it's due: the syntax for MPCs is in part inspired by YAML front matter used in Jekyll. I had built numerous sites with Jekyll myself: blogs, open-source project sites, web app prototypes, design specs for mobile apps.</p>
-
-<p>Stark differs from most static site generators in that it also generates CSS and JavaScript code.</p>
-
-<p>There are no layouts, includes, filter plugins, generator plugins or other file types for Stark. There are only components. I think this architecture is simpler and more powerful. You learn to work with one type of module and you can use it for everything.</p>
-
-<p>Stark has its cons.</p>
-
-<p>1. It is nowhere near as polished as Jekyll. Stark is a very young project and you may find lots of bugs, rough edges, etc.</p>
-
-<p>2. Stark's syntax is more complex than YAML front matter + Markdown. To fully utilize its power you need to know HTML and CSS and JavaScript.</p>
+h2 A small FAQ
 
 
-<h3>Q: Man, where's muh MVC in this JS framework?</h3>
+h3 Q: So how is it better or worse than other static site generators? [cough *Jekyll* cough]
 
-<p>Stark is not a framework. It is a generator. It has some simple rules for building static HTML, CSS and JavaScript files from components. That is all.</p>
+p First lets give the credit where it's due: the syntax for MPCs is in part inspired by YAML front matter used in Jekyll. I had built numerous sites with Jekyll myself: blogs, open-source project sites, web app prototypes, design specs for mobile apps.
 
-<p>You can use a framework of your choice with Stark.</p>
+p Stark differs from most static site generators in that it also generates CSS and JavaScript code.
 
-<p>That said, the syntax for specifying requirements and exports in the components allows for building complex Single-Page Applications with Stark.</p>
+p There are no layouts, includes, filter plugins, generator plugins or other file types for Stark. There are only components. I think this architecture is simpler and more powerful. You learn to work with one type of module and you can use it for everything.
 
-<%
+p Stark has its cons.
 
-/// Functions ------------------------------------------------------------------
+p 1. It is nowhere near as polished as Jekyll. Stark is a very young project and you may find lots of bugs, rough edges, etc.
 
-function dirname( str ){
+p 2. Stark's syntax is more complex than YAML front matter + Markdown. To fully utilize its power you need to know HTML and CSS and JavaScript.
 
-    var path = str.split( "/" );
-    path.pop();
 
-    return path.join( "/" );
-}///
+h3 Q: Man, where's muh MVC in this JS framework?
 
-%>
+p Stark is not a framework. It is a generator. It has some simple rules for building static HTML, CSS and JavaScript files from components. That is all.
+
+p You can use a framework of your choice with Stark.
+
+p That said, the syntax for specifying requirements and exports in the components allows for building complex Single-Page Applications with Stark.
+
+/// functions ------------------------------------------------------------------
+
+-   function dirname( str ){ var path= str.split( "/" ); path.pop(); return path.join( "/" ); }
+

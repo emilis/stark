@@ -1,4 +1,4 @@
---- styl -----------------------------------------------------------------------
+--- styl ---
 
 html 
     
@@ -10,7 +10,6 @@ html
     background      Menu
     background      ThreeDFace
 
-
 body 
 
     min-height      100%
@@ -20,14 +19,11 @@ body
     background      white
     box-shadow      0 0 1em #333
 
-
 html, body 
     
     font-family     Fira Sans, Helvetica Neue, Helvetica, Arial, sans-serif
     font-size       110%
 
-
 small 
 
     color           #999
-

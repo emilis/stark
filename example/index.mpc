@@ -1,12 +1,14 @@
---- requirements ---------------------------------------------------------------
+--- requirements ---
 
+config
 layout:             lib/stark-example/layout
 tehButton:          lib/stark-example/teh-button
 lib/stark-example/common-controls
 
---- yaml -----------------------------------------------------------------------
+--- yaml ---
 
 title:              It worked!
+
 nextPage:           /cat
 btnMessages:
     -   What happen?
@@ -14,19 +16,16 @@ btnMessages:
     -   We get signal!
     -   Next screen turn on. »
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<p>If you see this page, it means Stark works on your computer and successfully generated this site.</p>
+p If you see this page, it means Stark works on your computer and successfully generated this site.
 
-<p class="big-ok">&check;Success</p>
+p.big-ok &check;Success
 
-<div class="for-button"><%= tehButton({
-        label:      "Proceed with intro »",
-        url:        nextPage,
-        messages:   btnMessages,
-        }) %></div>
+.for-button
+    != tehButton({ url: config.BASE_URL + nextPage, label: "Proceed with intro »", messages: btnMessages })
 
---- css -----------------------------------------------------------------------
+--- css ---
 
 .big-ok {
 

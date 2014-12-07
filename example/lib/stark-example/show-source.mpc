@@ -1,36 +1,29 @@
---- requirements ---------------------------------------------------------------
+--- requirements ---
 
 ../zepto/zepto
 
---- yaml -----------------------------------------------------------------------
+--- yaml ---
 
 label:                      Show source
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<div class="<%- CLASSNAME %>">
-    <a class="toggle-on"><%- label %> [+]</a>
-    <a class="toggle-off" style="display: none"><%- component.fullPath %>.mpc [–]</a>
-    <div class="code">
-        <pre><%
-            component.parts.forEach( showPart );
-        %></pre>
-    </div>
-</div>
-<%
+div( class= CLASSNAME )
 
-function showPart( part ){
+    a.toggle-on
+        =                   label + "[+]"
+    a.toggle-off( style= { display: "none" })
+        =                   component.fullPath + ".mpc [–]"
 
-    %><b>--- <%- part.partName %> -------------------------------------</b>
+    pre.code
+        each part in component.parts
 
-<%- part.content %>
+            b --- #{ part.partName } ---
+            !=  "\n\n"
+            =   part.content
+            !=  "\n\n"
 
-<%
-}
-
-%>
-
---- styl -----------------------------------------------------------------------
+--- styl ---
 
 {SELECTOR}
 
@@ -47,16 +40,13 @@ function showPart( part ){
         text-decoration     underline
         cursor              pointer
     
-
-    pre 
+    > pre 
 
         margin              0
         background-color    #eee
         white-space         pre-wrap
-    
 
-
---- js -------------------------------------------------------------------------
+--- js ---
 
 $( init );
 

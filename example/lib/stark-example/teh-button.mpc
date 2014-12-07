@@ -1,8 +1,8 @@
---- requirements ---------------------------------------------------------------
+--- requirements ---
 
 ../zepto/zepto
 
---- yaml -----------------------------------------------------------------------
+--- yaml ---
 
 label:              Click me!
 url:                ""
@@ -15,21 +15,19 @@ messages:
     -   "*~BANG!~*"
     -   OK then.
 
+--- jade ---
 
---- jst ------------------------------------------------------------------------
+div( class= CLASSNAME + "-placeholder" )
+    div(
+        class=          CLASSNAME
+        data-messages=  messages )
 
-<%
+        if url
+            a.button( href= url )= label
+        else
+            a.button=   label
 
-var href=   url ? 'href="'+url+'"' : "";
-
-%>
-<div class="<%- CLASSNAME %>-placeholder">
-    <div class="<%- CLASSNAME %>" data-messages="<%- JSON.stringify( messages ) %>">
-        <a class="button" <%= href %>><%- label %></a>
-    </div>
-</div>
-
---- js -------------------------------------------------------------------------
+--- js ---
 
 $( init );
 
@@ -93,7 +91,7 @@ function getOppositePos( $div, evt ){
     };
 }///
 
---- styl -----------------------------------------------------------------------
+--- styl ---
 
 {SELECTOR}-placeholder 
 

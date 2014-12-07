@@ -1,44 +1,46 @@
---- jst -----------------------------------------------------------------------
+--- yml ---
 
-<%
+page:                   {}
 
-var page =              page || {};
-var page_css =          page.css || "";
-var page_js =           page.js || false;
+--- jade ---
 
-var language =          page.language || "en";
-var title =             page.title || "Untitled document";
-var page_image =        page.image || false;
+-   var timestamp =     ( new Date() ).getTime().toString( 36 )
 
-var timestamp =         ( new Date() ).getTime().toString( 36 );
+doctype html
+html( lang= page.language || "en" )
 
-%><!DOCTYPE html>
-<html lang="<%- language %>">
-<head>
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <% if ( page_image ){ %>
-        <meta property="og:image" content="<%- page_image %>">
-    <% } %>
-    <title><%- title %></title>
-    <link rel="stylesheet" href="/static/style.css?<%- timestamp %>">
-    <script async="async" defer="defer" src="/static/script.js?<%- timestamp %>"></script>
-    <style type="text/css">
-        <%= page_css %>
-    </style>
-</head>
-<body>
-    <%= content %>
-    <script>
-        document.body.htmlDone =    true;
-        var event = document.createEvent('Event');
-        event.initEvent( "html-done", true, true );
-        document.dispatchEvent( event );
-    </script>
-    <% if ( page_js ){ %>
-        <script> (function(){
-            <%= page_js %>
-        })(); </script>
-    <% } %>
-</body>
-</html>
+    head
+        meta( charset= "utf8" )
+        meta(
+            name=       "viewport"
+            content=    "width=device-width, initial-scale=1.0" )
+
+        if page.image
+            meta(
+                property=   "og:image"
+                content=    page.image )
+
+        title=          page.title || "Untitled document"
+
+        link(
+            rel=        "stylesheet"
+            href=       "/static/style.css?" + timestamp )
+
+        script(
+            async=      true
+            defer=      true
+            src=        "/static/script.js?" + timestamp )
+
+        if page.css
+            style( type= "text/css" )
+                != page.css
+
+    body
+
+        != content
+
+        if page.js
+            script
+                |   (function(){
+                |   !{ page.js }
+                |   })();
