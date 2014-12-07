@@ -20,20 +20,45 @@ btnMessages:
 
 p If you see this page, it means Stark works on your computer and successfully generated this site.
 
-p.big-ok &check;Success
+.css-status
+    .error
+        | &otimes; Error
+        p.small
+            |   The CSS failed to load.
+            |   You are probably serving this site from a non-root URL.
+            |   Change the value of "BASE_URL" in <em>config.mpc</em> to fix this.
+    .success
+        | &check; Success
 
 .for-button
     != tehButton({ url: config.BASE_URL + nextPage, label: "Proceed with intro »", messages: btnMessages })
 
 --- css ---
 
-.big-ok {
+.css-status {
 
     text-align:     center;
     font-size:      72pt;
-    color:          green;
     margin:         0;
 }
+
+    .css-status > .error {
+
+        color:          red;
+        display:        block;
+    }
+
+    .css-status > .success {
+
+        color:          green;
+        display:        none;
+    }
+
+    .css-status p.small {
+
+        font-size:      12pt;
+    }
+
 
 .for-button {
     

@@ -27,3 +27,10 @@ html, body
 small 
 
     color           #999
+
+.css-status
+
+    > .error
+        display     none !important
+    > .success
+        display     block !important

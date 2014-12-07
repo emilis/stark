@@ -1,3 +1,7 @@
+--- requirements ---
+
+config:                 ../../config
+
 --- yml ---
 
 page:                   {}
@@ -24,12 +28,12 @@ html( lang= page.language || "en" )
 
         link(
             rel=        "stylesheet"
-            href=       "/static/style.css?" + timestamp )
+            href=       config.BASE_URL + "/static/style.css?" + timestamp )
 
         script(
             async=      true
             defer=      true
-            src=        "/static/script.js?" + timestamp )
+            src=        config.BASE_URL + "/static/script.js?" + timestamp )
 
         if page.css
             style( type= "text/css" )
