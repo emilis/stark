@@ -45,7 +45,7 @@ function compileSite( src, dest ){
     config.DEST =       dest;
     config.pages =      config.pages || src + "/pages";
 
-    if( config.partMap.compiler ){
+    if( config.partMap && config.partMap.compiler ){
         config.compiler =   YAML.parse( config.partMap.compiler );
     } else {
         config.compiler =   {};
