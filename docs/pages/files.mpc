@@ -7,7 +7,13 @@ defTable:           ../lib/stark/def-table
 id:                 files
 title:              Files and Directories
 
---- fileTable ------------------------------------------------------------------
+--- jade -----------------------------------------------------------------------
+
+p Now lets look through the contents of your site directory:
+
+!= defTable({ prefix: id, content: fileTable })
+
+--- fileTable ---
 
 build   |   build/      |   Output directory.           |   Stark will create it if it is missing.
 index   |   index.mpc   |   Home page. Starting point.  |   Required.
@@ -16,7 +22,15 @@ lib     |   lib/        |   Components directory.       |   Optional.
 pages   |   pages/      |   Pages directory.            |   Optional.
 static  |   static/     |   Static files directory.     |   Optional.
 
---- buildFiles -----------------------------------------------------------------
+--- jade ---
+
+h3( id= id+ "-build" ) build/
+
+p You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:
+
+!= defTable({ prefix: id, content: buildFiles })
+
+--- buildFiles ---
 
 | index.html            |   Home page created from index.mpc
 | style.css             |   CSS style built from requirements of index.mpc
@@ -24,69 +38,45 @@ static  |   static/     |   Static files directory.     |   Optional.
 | static/               |   Files copied over from static/
 | somepage/ index.html  |   Page created from pages/somepage.mpc
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<p>Now lets look through the contents of your site directory:</p>
+h3( id= id+ "-index" ) index.mpc
 
-<%= defTable({
-    prefix:     id,
-    content:    fileTable,
-    }) %>
+p This is the main page of the site and the starting point for CSS and JavaScript generation:
 
-
-<%= subtitle( id, "build", "build/" ) %>
-
-<p>You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:</p>
-
-<%= defTable({
-    prefix:     id,
-    content:    buildFiles,
-    }) %>
+ul
+    li Stark creates <tt>build/index.html</tt> from jst/html/markdown part of this page.
+    
+    li Stark creates <tt>build/script.js</tt> and <tt>build/style.css</tt> from the requirements of this page.
 
 
-<%= subtitle( id, "index", "index.mpc" ) %>
+h3( id= id+ "-config" ) config.mpc
 
-<p>This is the main page of the site and the starting point for CSS and JavaScript generation:</p>
+p The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in <tt>jst</tt> templates.
 
-<ul>
-    <li>Stark creates <tt>build/index.html</tt> from jst/html/markdown part of this page.</li>
-    <li>Stark creates <tt>build/script.js</tt> and <tt>build/style.css</tt> from the requirements of this page.</li>
-</ul>
+p: em Alternatively you can rename the file to <tt>config.yaml</tt>. (Don't forget to remove the MPC part headers).
 
 
-<%= subtitle( id, "config", "config.mpc" ) %>
+h3( id= id+ "-pages" ) pages/
 
-<p>The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in <tt>jst</tt> templates.</p>
-
-<p><em>Alternatively you can rename the file to <tt>config.yaml</tt>. (Don't forget to remove the MPC part headers).</em></p>
-
-
-<%= subtitle( id, "pages", "pages/" ) %>
-
-<p>Directory for your page components. <tt>pages/yourpage.mpc</tt> will be used to generate <tt>build/yourpage/index.html</tt>.</p>
+p Directory for your page components.
+    tt  pages/yourpage.mpc
+    |   will be used to generate
+    tt  build/yourpage/index.html
+    |   .
 
 
-<%= subtitle( id, "static", "static/" ) %>
+h3( id= id+ "-static" ) static/
 
-<p>The contents of this directory are recursively copied to <tt>build/static</tt>.</p>
+p The contents of this directory are recursively copied to <tt>build/static</tt>.
 
 
-<%= subtitle( id, "lib", "lib/" ) %>
+h3( id= id+ "-lib" ) lib/
 
-<p>This is the directory for templates, widgets, JS modules, third party libraries. You should probably put source files into subdirectories and not to the <tt>lib/</tt> itself, e.g.:</p>
+p This is the directory for templates, widgets, JS modules, third party libraries. You should probably put source files into subdirectories and not to the <tt>lib/</tt> itself, e.g.:
 
-<ul>
-    <li><tt>lib/jquery/jquery.js</tt></li>
-    <li><tt>lib/yourproject/layout.mpc</tt></li>
-    <li><tt>lib/yourname/widely-reused-library.mpc</tt></li>
-</ul>
+ul
+    li: tt lib/jquery/jquery.js
+    li: tt lib/yourproject/layout.mpc
+    li: tt lib/yourname/widely-reused-library.mpc
 
-<%
-/// Functions ------------------------------------------------------------------
-
-function subtitle( prefix, name, title ){
-
-    return '<h3 id="' + prefix + '-' + name + '">' + title + '</h4>';
-}///
-
-%>

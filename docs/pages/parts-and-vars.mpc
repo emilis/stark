@@ -7,37 +7,25 @@ defTable:           ../lib/stark/def-table
 id:                 parts
 title:              Component Parts and Variables
 
---- partTable ------------------------------------------------------------------
+--- jade -----------------------------------------------------------------------
+
+p Stark pages and components are made of parts. Some of them are processed before including in the final output, others are copied verbatim.
+
+!= defTable({ prefix: id, content: partTable })
+
+--- partTable ---
 
 | requirements  | List of required components. <a href="https://github.com/emilis/mpc/wiki/MPC-File-Format#user-content-requirements-part">Format docs</a>.
 | exports       | List of exported values from <code>js</code> part. <a href="https://github.com/emilis/mpc/wiki/MPC-File-Format#user-content-exports-part">Format docs</a>.
-| yaml / yml    | Data available inside of <code>jst</code> and <code>js</code> parts. <a href="https://en.wikipedia.org/wiki/YAML">About YAML</a>.
-| jst           | JavaScript Template part. Takes priority over other template types. <a href="https://lodash.com/docs#template">Format docs</a>.
+| yaml / yml    | Data available inside of template and <code>js</code> parts. <a href="https://en.wikipedia.org/wiki/YAML">About YAML</a>.
+| jade          | Jade template part. Takes priority over all template types. <a href="http://jade-lang.com/">Format docs</a>.
+| jst           | JavaScript template part. Takes priority over other template types (except Jade). <a href="https://lodash.com/docs#template">Format docs</a>.
 | js            | JavaScript that gets executed on the browser side.
 | styl / stylus | <a href="http://learnboost.github.io/stylus/">Stylus</a> CSS format.
 | css           | Plain CSS. Will not be processed by Stylus.
 | md / markdown | Alternate format for page content.
 | html / php    | Alternate format for page content. Not processed.
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<p>Stark pages and components are made of parts. Some of them are processed before including in the final output, others are copied verbatim.</p>
-
-<%= defTable({
-    prefix:     id,
-    content:    partTable,
-    }) %>
-
-<!--
-<%= subtitle( id, "requirements", "requirements" ) %>
--->
-
-<%
-/// Functions ------------------------------------------------------------------
-
-function subtitle( prefix, name, title ){
-
-    return '<h3 id="' + prefix + '-' + name + '">' + title + '</h4>';
-}///
-
-%>
+/// next: requirements

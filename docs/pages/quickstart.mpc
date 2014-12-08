@@ -1,29 +1,37 @@
 --- requirements ---------------------------------------------------------------
 
-shellCode:      ../lib/stark/shell-code
+shellCode:          ../lib/stark/shell-code
 
 --- yaml -----------------------------------------------------------------------
 
-id:             quickstark
-title:          Quick Start
-openUrl:        http://localhost:7780
+id:                 quickstark
+title:              Quick Start
+openUrl:            http://localhost:7780
 
---- launchCode -----------------------------------------------------------------
+--- jade -----------------------------------------------------------------------
+
+p Run this in your terminal:
+
+!= shellCode({ content: launchCode })
+
+--- launchCode ---
 
 ~$          |   npm install -g stark
 ~$          |   stark new yoursite
 ~$          |   cd yoursite/
 ~/yoursite$ |   stark serve
 
---- jst ------------------------------------------------------------------------
+--- jade ---
 
-<p>Run this in your terminal:</p>
+p Then open the printed link in your browser (usually it's
+    | 
+    a( href= openUrl )= openUrl
+    | ). You should see a page like this:
 
-<%= shellCode({ content: launchCode }) %>
-
-<p>Then open the printed link in your browser (usually it's <a href="<%- openUrl %>"><%- openUrl %></a>). You should see a page like this:</p>
-
-<p class="full-width screenshot"><img src="static/success.png" alt="Success"></p>
+p.full-width.screenshot
+    img(
+        src=        "static/success.png"
+        alt=        "Success" )
 
 --- styl -----------------------------------------------------------------------
 
