@@ -31,6 +31,8 @@
     "mpc": ">=0.2.5",
     "ncp": "~1.0.0",
     "node-static": "~0.7.6",
+    "react": "^0.12.2",
+    "react-jade": "git://github.com/emilis/react-jade",
     "rimraf": "^2.2.8",
     "stylus": "^0.49.2",
     "yamljs": "~0.1.5",
