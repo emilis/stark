@@ -1,10 +1,10 @@
 --- requirements ---------------------------------------------------------------
 
-structure:          ../emilis/with-hide-menu
-main:               main-content
-menu:               menu
-footer:             footer
-theme
+structure:          emilis/with-hide-menu
+main:               ./main-content
+menu:               ./menu
+footer:             ./footer
+./theme
 
 --- jst ------------------------------------------------------------------------
 

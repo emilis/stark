@@ -1,7 +1,7 @@
 --- requirements ---------------------------------------------------------------
 
-layout:             lib/stark/html5
-pager:              lib/stark/pager
+layout:             stark/html5
+pager:              stark/pager
 
 quickstart:         pages/quickstart
 download:           pages/download
