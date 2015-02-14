@@ -1,6 +1,6 @@
 --- requirements ---------------------------------------------------------------
 
-screen-frame
-show-source
-teh-button
+./screen-frame
+./show-source
+./teh-button
 

@@ -1,6 +1,6 @@
 --- requirements ---
 
-../zepto/zepto
+zepto/zepto
 
 --- yaml ---
 

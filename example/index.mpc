@@ -1,9 +1,9 @@
 --- requirements ---
 
 config
-layout:             lib/stark-example/layout
-tehButton:          lib/stark-example/teh-button
-lib/stark-example/common-controls
+layout:             stark-example/layout
+tehButton:          stark-example/teh-button
+stark-example/common-controls
 
 --- yaml ---
 

@@ -1,10 +1,10 @@
 --- requirements ---
 
-config:             ../config
-layout:             ../lib/stark-example/layout
-frame:              ../lib/stark-example/screen-frame
-showSource:         ../lib/stark-example/show-source
-button:             ../lib/stark-example/teh-button
+config
+layout:             stark-example/layout
+frame:              stark-example/screen-frame
+showSource:         stark-example/show-source
+button:             stark-example/teh-button
 
 --- yaml ---
 

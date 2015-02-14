@@ -1,8 +1,8 @@
 --- requirements ---
 
-layout:             html5
-showSource:         show-source
-theme
+layout:             ./html5
+showSource:         ./show-source
+./theme
 
 --- jade ---
 
