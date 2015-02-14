@@ -14,6 +14,10 @@ var cssCompiler =       require( "./lib/compilers/css" );
 var jsCompiler =        require( "./lib/compilers/js" );
 var pageCompiler =      require( "./lib/compilers/pages" );
 
+/// Constants ------------------------------------------------------------------
+
+var MPC_INCLUDE_PATH=   [ ".", "lib", "node_modules", "bower_components" ];
+
 /// Exports --------------------------------------------------------------------
 
 module.exports = {
@@ -106,6 +110,7 @@ function compileCss( indexName, fileName, config, getSiteComponent ){
         all:            true,
         recursive:      true,
         sort:           true,
+        includePath:    MPC_INCLUDE_PATH,
         parts:          cssCompiler.partNames,
     };
 
@@ -134,6 +139,7 @@ function compileJs( indexName, fileName, config, getSiteComponent ){
         all:            true,
         recursive:      true,
         sort:           true,
+        includePath:    MPC_INCLUDE_PATH,
         parts:          jsCompiler.partNames,
     };
 
@@ -153,6 +159,7 @@ function compilePages( indexName, pageDir, dest, config, getSiteComponent ){
     var mpcOptions = {
         all:                true,
         fillRequirements:   true,
+        includePath:        MPC_INCLUDE_PATH,
     };
 
     var components =        mpc.parseComponent( indexName, mpcOptions );
