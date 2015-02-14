@@ -64,16 +64,19 @@ function compileSite( src, dest ){
         config );
 
     compileCss(
+        src,
         src + "/index",
         dest + "/static/style.css",
         config, getSiteComponent );
 
     compileJs(
+        src,
         src + "/index",
         dest + "/static/script.js",
         config, getSiteComponent );
 
     compilePages(
+        src,
         src + "/index",
         config.pages,
         dest,
@@ -104,13 +107,13 @@ function copyStatic( src, dest, config ){
 }///
 
 
-function compileCss( indexName, fileName, config, getSiteComponent ){
+function compileCss( src, indexName, fileName, config, getSiteComponent ){
 
     var mpcOptions = {
         all:            true,
         recursive:      true,
         sort:           true,
-        includePath:    MPC_INCLUDE_PATH,
+        includePath:    getIncludePaths( src, MPC_INCLUDE_PATH ),
         parts:          cssCompiler.partNames,
     };
 
@@ -133,13 +136,13 @@ function compileCss( indexName, fileName, config, getSiteComponent ){
 }///
 
 
-function compileJs( indexName, fileName, config, getSiteComponent ){
+function compileJs( src, indexName, fileName, config, getSiteComponent ){
 
     var mpcOptions = {
         all:            true,
         recursive:      true,
         sort:           true,
-        includePath:    MPC_INCLUDE_PATH,
+        includePath:    getIncludePaths( src, MPC_INCLUDE_PATH ),
         parts:          jsCompiler.partNames,
     };
 
@@ -154,12 +157,12 @@ function compileJs( indexName, fileName, config, getSiteComponent ){
 }///
 
 
-function compilePages( indexName, pageDir, dest, config, getSiteComponent ){
+function compilePages( src, indexName, pageDir, dest, config, getSiteComponent ){
 
     var mpcOptions = {
         all:                true,
         fillRequirements:   true,
-        includePath:        MPC_INCLUDE_PATH,
+        includePath:        getIncludePaths( src, MPC_INCLUDE_PATH ),
     };
 
     var components =        mpc.parseComponent( indexName, mpcOptions );
@@ -189,3 +192,13 @@ function isNotComponent( name ){
     };//
 }///
 
+
+function getIncludePaths( base, paths ){
+
+    return paths.map( prependBase );
+
+    function prependBase( p ){
+
+        return path.resolve( base, p );
+    }///
+}///
