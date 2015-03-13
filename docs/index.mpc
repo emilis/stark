@@ -1,34 +1,33 @@
 --- requirements ---------------------------------------------------------------
 
-layout:             stark/html5
-pager:              stark/pager
+layout:     stark/html5
+pager:      stark/pager
 
-quickstart:         pages/quickstart
-download:           pages/download
-files:              pages/files
-contributing:       pages/contributing
-partsVars:          pages/parts-and-vars
+pages/stark
+pages/quickstart
+pages/directories
 
 --- yaml -----------------------------------------------------------------------
 
-title:              Stark
-image:              /static/logo.png
+title:      Stark
+image:      /static/logo.png
+pages:
+    -
+        -   stark
+        -   quickstart
+    -
+        -   reference
+        -   directories
+        -   files
+        -   parts-and-vars
+    -
+        -   other
+        -   contributing
 
---- html -------------------------------------------------------------------------
-
-<p><img src="static/logo.png" alt="Stark"></p>
-
-<p>Stark lets you build <b>complex</b> static websites and single-page applications <b>easily</b>.</p>
-
-<p>It generates sites from <b>components</b> in a special syntax that is exceptionally <b>readable</b>, easy to write and naturally leads to <b>simpler</b> code.</p>
-
---- jst ------------------------------------------------------------------------
+--- jst -----------------------------------------------------------------------
 
 <%= pager({
-        prefix:     html,
-        pages: [
-                    quickstart,
-                    files,
-                    partsVars,
-                    contributing,
-        ]}) %>
+    site:   site,
+    pages:  pages,
+    })
+%>

@@ -1,0 +1,60 @@
+--- yaml ----------------------------------------------------------------------
+
+id:             top
+title:          STARK(»)
+
+--- jade ----------------------------------------------------------------------
+
+div( class= [ CLASSNAME, "full-width" ])
+
+    h1#main-title
+        img( src= "static/logo.png", alt= "Stark" )
+
+        | A <em>straightforward</em> way to build<br>single-page apps and static websites
+
+    .three-features
+
+        div
+            h3  Expressive
+            p   Yaml, Jade, Stylus used by default. You can even use LiveScript if you want.
+        div
+            h3  Simple
+            p   Everything is a multi-part component: pages, widgets, themes, libraries, configuration. It simply works.
+        div
+            h3  Plugged-in
+            p   Stark strives to reuse what exists. React and Bower components work today. Expect more in the future.
+
+
+--- styl ----------------------------------------------------------------------
+
+{SELECTOR}
+
+    $logoWidth =            180px
+    $logoHeight =           60px
+
+    > h1#main-title
+
+        margin-bottom       0.6 * $logoHeight
+        line-height         0.5 * $logoHeight
+        font-size           0.4 * $logoHeight
+        font-weight         normal
+        color               $black
+
+        > img
+
+            float           left
+            margin-right    1.5 * $logoHeight
+
+
+    > .three-features
+
+        > div
+            
+            float           left
+            width           $logoWidth + $logoHeight
+            margin-right    0.5 * $logoHeight
+            margin-bottom   $lineHeight
+
+            > p
+
+                margin-bottom   0

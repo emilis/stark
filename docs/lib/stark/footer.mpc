@@ -2,23 +2,22 @@
 
 ./theme
 
---- jst ------------------------------------------------------------------------
+--- yaml ----------------------------------------------------------------------
 
-<div class="<%- CLASSNAME %>-spacer"></div>
-<footer class="<%- CLASSNAME %>">
-    <ul>
-        <li><a href="#"><b>Top</b></a></li>
-        <% pages.forEach( showLink ) %>
-    </ul>
-</footer>
-<%
+pages:                  []
 
-function showLink( p ){
+--- jade ----------------------------------------------------------------------
 
-    %><li><a href="#<%- p.id %>"><%- p.title %></a></li><%
-}///
-
-%>
+div( class= CLASSNAME + "-spacer" )
+footer( class= CLASSNAME )
+    each group in pages
+        ul
+            each link, index in group
+                li: a( href= "#" + link.id )
+                    if index
+                        =   link.title
+                    else
+                        b=  link.title
 
 --- styl -----------------------------------------------------------------------
 

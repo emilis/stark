@@ -5,7 +5,7 @@ defTable:           stark/def-table
 --- yaml -----------------------------------------------------------------------
 
 id:                 parts
-title:              Component Parts and Variables
+title:              Component Parts 
 
 --- jade -----------------------------------------------------------------------
 

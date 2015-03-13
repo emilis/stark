@@ -12,33 +12,19 @@ date:               ""
 content:            No content provided
 footer:             No footer content provided
 
---- jst ------------------------------------------------------------------------
+--- jade -----------------------------------------------------------------------
 
-<%
+main#main( class= CLASSNAME )
 
-noHeader =          noHeader ? "no-header" : "";
+    if  !noHeader
+        header.header
+            h1= title
+            h1= subtitle || date
 
-%>
-<main id="main" class="<%- CLASSNAME %> <%- noHeader %>">
-    <header class="header">
-        <% if ( !noHeader ){ %>
-        <h1><%- title %></h1>
-        <h2><%
-            if ( subtitle ){
-                print( subtitle );
-            } else if ( date ){
-                print( date );
-            }
-        %></h2>
-        <% } %>
-    </header>
+    .content
+        !=  content
 
-    <div class="content">
-        <%= content %>
-    </div>
-
-    <%= footer %>
-</main>
+    !=  footer
 
 --- styl -----------------------------------------------------------------------
 
@@ -84,18 +70,29 @@ noHeader =          noHeader ? "no-header" : "";
 
         margin                  0 auto 
         margin-bottom           50px 
-        line-height             1.6em 
+        line-height             $lineHeight
+
+        > hr.full-width
+
+            margin-top          $lineHeight
+            border-color        $tint
 
         > h2
+            font-size           2em
+            line-height         3em
 
-            padding-top:        1em
-            border-bottom:      1px solid $grayee
+        > h3
 
-    &.no-header  
+            font-size           1.5em
+            line-height         2em
 
-        > .header  
+            margin-top          $lineHeight
+            border-bottom       1px solid $grayee
 
-            display             none 
+        > h4
+
+            font-size           1.2em
+            line-height         $lineHeight
 
     @media $WIDE
          

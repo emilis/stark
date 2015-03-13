@@ -5,78 +5,59 @@ defTable:           stark/def-table
 --- yaml -----------------------------------------------------------------------
 
 id:                 files
-title:              Files and Directories
+title:              Files 
 
 --- jade -----------------------------------------------------------------------
-
-p Now lets look through the contents of your site directory:
 
 != defTable({ prefix: id, content: fileTable })
 
 --- fileTable ---
 
-build   |   build/      |   Output directory.           |   Stark will create it if it is missing.
-index   |   index.mpc   |   Home page. Starting point.  |   Required.
-config  |   config.mpc  |   Site-wide configuration.    |   Optional.
-lib     |   lib/        |   Components directory.       |   Optional.
-pages   |   pages/      |   Pages directory.            |   Optional.
-static  |   static/     |   Static files directory.     |   Optional.
+config          |   config.mpc              |   Site-wide configuration.    |   Optional.
+index           |   index.mpc               |   Home page. Starting point.  |   Required.
+build-html      |   build/index.html        |   Generated HTML.             |
+build-script    |   build/static/script.js  |   Generated JavaScript.       |
+build-style     |   build/static/style.css  |   Generated CSS.              |
 
 --- jade ---
 
-h3( id= id+ "-build" ) build/
 
-p You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:
+h4( id= id+ "-config" ) config.mpc
 
-!= defTable({ prefix: id, content: buildFiles })
-
---- buildFiles ---
-
-| index.html            |   Home page created from index.mpc
-| style.css             |   CSS style built from requirements of index.mpc
-| script.js             |   JavaScript modules build from requirements of index.mpc
-| static/               |   Files copied over from static/
-| somepage/ index.html  |   Page created from pages/somepage.mpc
-
---- jade ---
-
-h3( id= id+ "-index" ) index.mpc
-
-p This is the main page of the site and the starting point for CSS and JavaScript generation:
-
-ul
-    li Stark creates <tt>build/index.html</tt> from jst/html/markdown part of this page.
-    
-    li Stark creates <tt>build/script.js</tt> and <tt>build/style.css</tt> from the requirements of this page.
-
-
-h3( id= id+ "-config" ) config.mpc
-
-p The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in <tt>jst</tt> templates.
+p The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in templates.
 
 p: em Alternatively you can rename the file to <tt>config.yaml</tt>. (Don't forget to remove the MPC part headers).
 
 
-h3( id= id+ "-pages" ) pages/
+h4( id= id+ "-index" ) index.mpc
 
-p Directory for your page components.
-    tt  pages/yourpage.mpc
-    |   will be used to generate
-    tt  build/yourpage/index.html
-    |   .
-
-
-h3( id= id+ "-static" ) static/
-
-p The contents of this directory are recursively copied to <tt>build/static</tt>.
-
-
-h3( id= id+ "-lib" ) lib/
-
-p This is the directory for templates, widgets, JS modules, third party libraries. You should probably put source files into subdirectories and not to the <tt>lib/</tt> itself, e.g.:
+p This is the main page of the site and the starting point for CSS and JavaScript generation:
 
 ul
-    li: tt lib/jquery/jquery.js
-    li: tt lib/yourproject/layout.mpc
-    li: tt lib/yourname/widely-reused-library.mpc
+    li Stark creates <tt>build/index.html</tt> from template parts of this page.
+    
+    li Stark creates <tt>build/static/script.js</tt> and <tt>build/static/style.css</tt> from the requirements of this page.
+
+
+h4( id= id+ "-build-html" ) build/index.html
+
+p Stark will compile this HTML file from the template parts of
+    | 
+    a( href= "#"+id+"-index" ) index.mpc
+    | .
+
+h4( id= id+ "-build-script" ) build/static/script.js
+
+p Stark will compile JavaScript from
+    | 
+    a( href= "#"+id+"-index" ) index.mpc
+    |   dependencies into this file.
+
+
+h4( id= id+ "-build-style" ) build/static/style.css
+
+p Stark will compile CSS from
+    | 
+    a( href= "#"+id+"-index" ) index.mpc
+    |   dependencies into this file.
 

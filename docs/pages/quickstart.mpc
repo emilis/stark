@@ -1,5 +1,6 @@
 --- requirements ---------------------------------------------------------------
 
+screenshot:         stark/screenshot
 shellCode:          stark/shell-code
 
 --- yaml -----------------------------------------------------------------------
@@ -7,6 +8,9 @@ shellCode:          stark/shell-code
 id:                 quickstark
 title:              Quick Start
 openUrl:            http://localhost:7780
+image:
+    src:            static/success.png
+    alt:            Success
 
 --- jade -----------------------------------------------------------------------
 
@@ -16,10 +20,10 @@ p Run this in your terminal:
 
 --- launchCode ---
 
-~$          |   npm install -g stark
+~$          |   sudo npm install -g stark
 ~$          |   stark new yoursite
 ~$          |   cd yoursite/
-~/yoursite$ |   stark serve
+~/yoursite$ |   stark watch-server
 
 --- jade ---
 
@@ -28,18 +32,4 @@ p Then open the printed link in your browser (usually it's
     a( href= openUrl )= openUrl
     | ). You should see a page like this:
 
-p.full-width.screenshot
-    img(
-        src=        "static/success.png"
-        alt=        "Success" )
-
---- styl -----------------------------------------------------------------------
-
-.screenshot 
-
-    text-align      center
-
-    > img 
-        
-        width       320px
-        max-width   100%
+!=  screenshot( image )

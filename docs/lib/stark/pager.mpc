@@ -10,18 +10,56 @@ footer:             ./footer
 
 <%
 
+var pageIndex =     site.pages.reduce( indexByPath, {} );
+
+pages =             pages.map( fillGroup );
+
 print( structure({
     menu:           menu({ pages: pages }),
     content:        main({
-        noHeader:   true,
-        content:    prefix + pages.map( getPageHtml ).join( "" ),
+        noHeader:       true,
+        content:        pages.map( getGroupHtml ).join( '<hr class="full-width">' ),
         footer:         footer({ pages: pages }),
     }),
 }));
 
-function getPageHtml( p ){
 
-    return '<h2 id="' + p.id + '">' + p.title + '</h2>' + p.content;
+function indexByPath( index, page ){
+
+    index[ page.PATH ] =   page;
+    return index;
+}///
+
+
+function fillGroup( group ){
+
+    return group.map( fillPage );
+}///
+
+
+function fillPage( pageName ){
+
+    return pageIndex[ "/pages/" + pageName ] || {};
+}///
+
+
+function getGroupHtml( group, gi ){
+
+    return group.map( getPageHtml ).join( "" );
+
+    function getPageHtml( p, pi ){
+
+        
+        if( !pi ){
+            if( !gi ){
+                return p.content;
+            } else {
+                return '<h2 id="' + p.id + '">' + p.title + '</h2>' + p.content;
+            }
+        } else {
+            return '<h3 id="' + p.id + '">' + p.title + '</h3>' + p.content;
+        }
+    }///
 }///
 
 %>

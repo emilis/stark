@@ -1,0 +1,74 @@
+--- requirements --------------------------------------------------------------
+
+DefTable:           stark/def-table
+
+--- yaml ----------------------------------------------------------------------
+
+id:                 directories
+title:              Directories
+
+--- jade ----------------------------------------------------------------------
+
+p Now lets look through the contents of your site directory:
+
+!= DefTable({ prefix: id, content: dirTable })
+
+--- dirTable ---
+
+build   |   build  |   Output directory.   |   Stark will create it if it is missing.
+bower_components    |   bower_components   |   Bower components.  |   Optional. Used when finding components.
+lib     |   lib    |   Local components.   |   Optional. Used when finding components.
+node_modules        |   node_modules   | Node components.  |   Optional. Used when finding components.
+pages   |   pages  |   Pages.          |   Optional.
+static  |   static |   Static files.   |   Optional.
+
+--- jade ---
+
+h4( id= id+ "-build" ) build/
+
+p You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:
+
+!= DefTable({ prefix: id, content: buildFiles })
+
+--- buildFiles ---
+
+| index.html            |   Home page created from index.mpc
+| static/               |   Files copied over from static/
+| static/ style.css     |   CSS style built from requirements of index.mpc
+| static/ script.js     |   JavaScript modules build from requirements of index.mpc
+| somepage/ index.html  |   Page created from pages/somepage.mpc
+
+--- jade ---
+
+h4( id= id+ "-lib" )
+    a( name= id+ "-bower_components" )
+    a( name= id+ "-node_modules" )
+    | Component directories: lib, bower_components, node_modules
+
+p These directories are added to 
+    | 
+    i include path
+    | . Stark will search for requirements in these directories.
+
+p You should put your own templates, widgets, JS modules into <tt>lib</tt>. You should try installing third party libraries with
+    | 
+    a( href= "http://www.bower.io/" ) bower
+    |  and 
+    a( href= "http://www.npmjs.com/" ) npm
+    |  when available.
+
+
+h4( id= id+ "-pages" ) pages/
+
+p Directory for your page components.
+    tt  pages/yourpage.mpc
+    |   will be used to generate
+    tt  build/yourpage/index.html
+    |   .
+
+
+h4( id= id+ "-static" ) static/
+
+p The contents of this directory are recursively copied to <tt>build/static/</tt>.
+
+

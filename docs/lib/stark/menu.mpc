@@ -7,22 +7,17 @@ config
 
 pages:                  []
 
---- jst ------------------------------------------------------------------------
+--- jade ----------------------------------------------------------------------
 
-<div class="<%- CLASSNAME %>">
-    <ul>
-        <li><a href="#"><b>STARK(»)</b></a></li>
-        <% pages.forEach( showLink ) %>
-    </ul>
-</div>
-<%
-
-function showLink( p ){
-
-    %><li><a href="#<%- p.id %>"><%- p.title %></a></li><%
-}///
-
-%>
+div( class= CLASSNAME )
+    each group in pages
+        ul
+            each link, index in group
+                li: a( href= "#" + link.id )
+                    if index
+                        =   link.title
+                    else
+                        b=  link.title
 
 --- styl -----------------------------------------------------------------------
 
@@ -39,7 +34,7 @@ nolist()
     min-height          100% 
     padding             2em 0 
     box-sizing          border-box 
-    background          $graydd 
+    background          $grayee 
     color               $black 
 
     overflow-x          hidden 
@@ -48,10 +43,16 @@ nolist()
     > ul  
         
         nolist()
+        margin-bottom   $lineHeight
 
         > li  
 
             nolist()
+
+            &.group-title
+
+                margin-top      $lineHeight
+                font-weight     bold
 
             > a
 

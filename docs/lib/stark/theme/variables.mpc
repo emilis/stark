@@ -25,9 +25,11 @@ $marginNpre =           $marginN / 0.75
 
 $borderRadius =         4px
 
+$lineHeight =           1.6em
+
 /// Fonts ----------------------------------------------------------------------
 
-$sans =                 sans
+$sans =                 Ubuntu, sans
 $serif =                Cambria, serif
 $code =                 $serif
 $mono =                 monospace
