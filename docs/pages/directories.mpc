@@ -1,5 +1,6 @@
 --- requirements --------------------------------------------------------------
 
+config
 DefTable:           stark/def-table
 
 --- yaml ----------------------------------------------------------------------
@@ -52,9 +53,9 @@ p These directories are added to
 
 p You should put your own templates, widgets, JS modules into <tt>lib</tt>. You should try installing third party libraries with
     | 
-    a( href= "http://www.bower.io/" ) bower
+    a( href= config.urls.bower ) bower
     |  and 
-    a( href= "http://www.npmjs.com/" ) npm
+    a( href= config.urls.npm ) npm
     |  when available.
 
 

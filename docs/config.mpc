@@ -2,3 +2,17 @@
 
 ./lib/stark/theme/variables
 
+--- yaml ----------------------------------------------------------------------
+
+urls:
+    jade:       http://jade-lang.com/
+    jst:        https://lodash.com/docs#template
+    yaml:       https://en.wikipedia.org/wiki/YAML
+    stylus:     http://learnboost.github.io/stylus/
+    livescript: http://livescript.net/
+    react:      http://facebook.github.io/react/
+    bower:      http://bower.io/
+    npm:        http://www.npmjs.com/
+    mpc:
+        requirements:   https://github.com/emilis/mpc/wiki/MPC-File-Format#user-content-requirements-part
+        exports:        https://github.com/emilis/mpc/wiki/MPC-File-Format#user-content-exports-part

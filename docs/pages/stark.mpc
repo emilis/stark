@@ -1,28 +1,50 @@
+--- requirements --------------------------------------------------------------
+
+config
+
 --- yaml ----------------------------------------------------------------------
 
 id:             top
 title:          STARK(»)
+logo:
+    src:        static/logo.png
+    alt:        Stark
+_blank:         _blank
 
 --- jade ----------------------------------------------------------------------
 
-div( class= [ CLASSNAME, "full-width" ])
+- var URLS =    config.urls;
+
+div#top( class= [ CLASSNAME, "full-width" ])
 
     h1#main-title
-        img( src= "static/logo.png", alt= "Stark" )
+        img( src= logo.src, alt= logo.alt )
 
-        | A <em>straightforward</em> way to build<br>single-page apps and static websites
+        | A <strong>straightforward</strong> way to build<br>single-page apps and static websites
 
     .three-features
 
         div
             h3  Expressive
-            p   Yaml, Jade, Stylus used by default. You can even use LiveScript if you want.
+            p   
+                a( target= _blank, href= URLS.yaml ) Yaml
+                | , 
+                a( target= _blank, href= URLS.jade ) Jade
+                | , 
+                a( target= _blank, href= URLS.stylus ) Stylus
+                |   used by default. You can even use 
+                a( target= _blank, href= URLS.livescript ) LiveScript
+                |   if you want.
         div
             h3  Simple
             p   Everything is a multi-part component: pages, widgets, themes, libraries, configuration. It simply works.
         div
             h3  Plugged-in
-            p   Stark strives to reuse what exists. React and Bower components work today. Expect more in the future.
+            p   Stark strives to reuse what exists. 
+                a( target= _blank, href= URLS.react ) React
+                |   and 
+                a( target= _blank, href= URLS.bower ) Bower
+                |   components work today. Expect more in the future.
 
 
 --- styl ----------------------------------------------------------------------
