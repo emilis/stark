@@ -1,64 +1,11 @@
-<p>Now lets look through the contents of your site directory:</p>
-
 
 <div class="break mpc-lib-stark-def-table">
     <table class="pure-table">
         <tbody>
-        <tr><td class="tinted"><a href="#files-build">build/</a></td><td class="">Output directory. <small>Stark will create it if it is missing.</small></td></tr><tr><td class="tinted"><a href="#files-index">index.mpc</a></td><td class="">Home page. Starting point. <small>Required.</small></td></tr><tr><td class="tinted"><a href="#files-config">config.mpc</a></td><td class="">Site-wide configuration. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-lib">lib/</a></td><td class="">Components directory. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-pages">pages/</a></td><td class="">Pages directory. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-static">static/</a></td><td class="">Static files directory. <small>Optional.</small></td></tr>
+        <tr><td class="tinted"><a href="#files-config">config.mpc</a></td><td class="">Site-wide configuration. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#files-index">index.mpc</a></td><td class="">Home page. Starting point. <small>Required.</small></td></tr><tr><td class="tinted"><a href="#files-build-html">build/index.html</a></td><td class="">Generated HTML.</td></tr><tr><td class="tinted"><a href="#files-build-script">build/static/script.js</a></td><td class="">Generated JavaScript.</td></tr><tr><td class="tinted"><a href="#files-build-style">build/static/style.css</a></td><td class="">Generated CSS.</td></tr>
         </tbody>
     </table>
-</div>
-
-
-<h3 id="files-build">build/</h4>
-
-<p>You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:</p>
-
-
-<div class="break mpc-lib-stark-def-table">
-    <table class="pure-table">
-        <tbody>
-        <tr><td class="tinted">index.html</td><td class="">Home page created from index.mpc</td></tr><tr><td class="tinted">style.css</td><td class="">CSS style built from requirements of index.mpc</td></tr><tr><td class="tinted">script.js</td><td class="">JavaScript modules build from requirements of index.mpc</td></tr><tr><td class="tinted">static/</td><td class="">Files copied over from static/</td></tr><tr><td class="tinted">somepage/ index.html</td><td class="">Page created from pages/somepage.mpc</td></tr>
-        </tbody>
-    </table>
-</div>
-
-
-<h3 id="files-index">index.mpc</h4>
-
-<p>This is the main page of the site and the starting point for CSS and JavaScript generation:</p>
-
-<ul>
-    <li>Stark creates <tt>build/index.html</tt> from jst/html/markdown part of this page.</li>
-    <li>Stark creates <tt>build/script.js</tt> and <tt>build/style.css</tt> from the requirements of this page.</li>
-</ul>
-
-
-<h3 id="files-config">config.mpc</h4>
-
-<p>The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in <tt>jst</tt> templates.</p>
-
-<p><em>Alternatively you can rename the file to <tt>config.yaml</tt>. (Don't forget to remove the MPC part headers).</em></p>
-
-
-<h3 id="files-pages">pages/</h4>
-
-<p>Directory for your page components. <tt>pages/yourpage.mpc</tt> will be used to generate <tt>build/yourpage/index.html</tt>.</p>
-
-
-<h3 id="files-static">static/</h4>
-
-<p>The contents of this directory are recursively copied to <tt>build/static</tt>.</p>
-
-
-<h3 id="files-lib">lib/</h4>
-
-<p>This is the directory for templates, widgets, JS modules, third party libraries. You should probably put source files into subdirectories and not to the <tt>lib/</tt> itself, e.g.:</p>
-
-<ul>
-    <li><tt>lib/jquery/jquery.js</tt></li>
-    <li><tt>lib/yourproject/layout.mpc</tt></li>
-    <li><tt>lib/yourname/widely-reused-library.mpc</tt></li>
-</ul>
-
-
+</div><h4 id="files-config">config.mpc</h4><p>The data from the <tt>yaml</tt> part of this file will be available as <code>site.config</code> value in templates.</p><p><em>Alternatively you can rename the file to <tt>config.yaml</tt>. (Don't forget to remove the MPC part headers).</em></p><h4 id="files-index">index.mpc</h4><p>This is the main page of the site and the starting point for CSS and JavaScript generation:</p><ul><li>Stark creates <tt>build/index.html</tt> from template parts of this page.</li><li>Stark creates <tt>build/static/script.js</tt> and <tt>build/static/style.css</tt> from the requirements of this page.</li></ul><h4 id="files-build-html">build/index.html</h4><p>Stark will compile this HTML file from the template parts of
+ <a href="#files-index">index.mpc</a>.</p><h4 id="files-build-script">build/static/script.js</h4><p>Stark will compile JavaScript from
+ <a href="#files-index">index.mpc</a>  dependencies into this file.</p><h4 id="files-build-style">build/static/style.css</h4><p>Stark will compile CSS from
+ <a href="#files-index">index.mpc</a>  dependencies into this file.</p>

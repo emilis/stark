@@ -1,0 +1,17 @@
+<p>Now lets look through the contents of your site directory:</p>
+<div class="break mpc-lib-stark-def-table">
+    <table class="pure-table">
+        <tbody>
+        <tr><td class="tinted"><a href="#directories-build">build</a></td><td class="">Output directory. <small>Stark will create it if it is missing.</small></td></tr><tr><td class="tinted"><a href="#directories-bower_components">bower_components</a></td><td class="">Bower components. <small>Optional. Used when finding components.</small></td></tr><tr><td class="tinted"><a href="#directories-lib">lib</a></td><td class="">Local components. <small>Optional. Used when finding components.</small></td></tr><tr><td class="tinted"><a href="#directories-node_modules">node_modules</a></td><td class="">Node components. <small>Optional. Used when finding components.</small></td></tr><tr><td class="tinted"><a href="#directories-pages">pages</a></td><td class="">Pages. <small>Optional.</small></td></tr><tr><td class="tinted"><a href="#directories-static">static</a></td><td class="">Static files. <small>Optional.</small></td></tr>
+        </tbody>
+    </table>
+</div><h4 id="directories-build">build/</h4><p>You will find the compiled pages, scripts, styles and other files here. Directory contents should look like this:</p>
+<div class="break mpc-lib-stark-def-table">
+    <table class="pure-table">
+        <tbody>
+        <tr><td class="tinted">index.html</td><td class="">Home page created from index.mpc</td></tr><tr><td class="tinted">static/</td><td class="">Files copied over from static/</td></tr><tr><td class="tinted">static/ style.css</td><td class="">CSS style built from requirements of index.mpc</td></tr><tr><td class="tinted">static/ script.js</td><td class="">JavaScript modules build from requirements of index.mpc</td></tr><tr><td class="tinted">somepage/ index.html</td><td class="">Page created from pages/somepage.mpc</td></tr>
+        </tbody>
+    </table>
+</div><h4 id="directories-lib"><a name="directories-bower_components"></a><a name="directories-node_modules"></a>Component directories: lib, bower_components, node_modules</h4><p>These directories are added to 
+ <i>include path</i>. Stark will search for requirements in these directories.</p><p>You should put your own templates, widgets, JS modules into <tt>lib</tt>. You should try installing third party libraries with
+ <a href="http://www.bower.io/">bower</a> and <a href="http://www.npmjs.com/">npm</a> when available.</p><h4 id="directories-pages">pages/</h4><p>Directory for your page components.<tt> pages/yourpage.mpc</tt>  will be used to generate<tt> build/yourpage/index.html</tt>  .</p><h4 id="directories-static">static/</h4><p>The contents of this directory are recursively copied to <tt>build/static/</tt>.</p>
