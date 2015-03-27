@@ -4,7 +4,7 @@ config
 
 --- yaml ----------------------------------------------------------------------
 
-id:             top
+id:             main
 title:          STARK(»)
 logo:
     src:        static/logo.png
