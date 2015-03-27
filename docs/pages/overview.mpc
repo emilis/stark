@@ -1,0 +1,71 @@
+--- yaml ----------------------------------------------------------------------
+
+id:                 overview
+title:              Overview
+
+--- md ------------------------------------------------------------------------
+
+Lets take the typical web development process:
+
+1.  there exists some problem or need
+1.  someone comes out with an idea
+1.  the idea is sketched on a piece of paper
+1.  a designer may transform this into PSD's for the app/site
+1.  development starts by splitting the design into HTML, CSS and JavaScript layers which are further developed as three separate, but very inter-connected subprojects.
+
+Stark changes the last step: you build the app or site out of small components that encapsulate HTML/template, CSS and JavaScript parts. The components depend on each other. Stark does the rest.
+
+>   Building a web project this way reduces complexity: the number of interconnected layers / dependency trees a developer has to keep in mind. The components (although consisting of parts in different languages) have very high cohesion and reduce coupling. They visually map to what one sees on the screen in the final result.
+
+You may notice that the idea is very similar to Web Components. However there are some differences:
+
+* you don't have to wait for browser support,
+* expressive syntax,
+* more goodies built into Stark (YAML parts, development server, React support, etc.)
+
+#### How Multi-Part Components work
+
+Stark treats multiple files with the same basename but different extensions as parts of the same component. Therefore:
+
+```javascript
+widget.html + widget.css + widget.js => { name: "widget", parts: { html: "...", css: "...", js: "..." }}
+```
+
+There is also a special file format for having all parts in the same file, e.g:
+
+```javascript
+widget.mpc => { name: "widget", parts: { html: "...", css: "...", js: "..." }}
+```
+
+Where widget.mpc contents look like this:
+
+```mpc
+    --- html ---
+
+    ...
+
+    --- css ---
+
+    ...
+
+    --- js ---
+
+    ...
+```
+
+You can also combine `*.mpc` and other files:
+
+```javascript
+widget.mpc + widget.txt => { name: "widget", parts: { html: "...", css: "...", js: "...", txt: "..." }}
+```
+
+Components can depend on each other. This is expressed in their requirement part:
+
+```mpc
+    --- requirements ---
+
+    jquery/dist/jquery
+    Widget2:    ./widget2
+```
+
+Stark builds a dependency graph from these requirements (starting from index.mpc file) and generates HTML, CSS, JavaScript files for your app or site.
