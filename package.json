@@ -23,7 +23,7 @@
     "url": "https://github.com/emilis/stark/blob/master/LICENSE.txt"
   },
   "dependencies": {
-    "LiveScript": "^1.3.1",
+    "livescript": "^1.4.0",
     "chokidar": "^0.11.1",
     "jade": "^1.7.0",
     "lodash": "~2.4.1",
