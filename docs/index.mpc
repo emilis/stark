@@ -5,6 +5,7 @@ pager:      stark/pager
 
 pages/stark
 pages/quickstart
+pages/overview
 pages/directories
 
 --- yaml -----------------------------------------------------------------------
@@ -15,6 +16,7 @@ pages:
     -
         -   stark
         -   quickstart
+        -   overview
     -
         -   reference
         -   directories
