@@ -489,6 +489,13 @@ code.unselectable {
 .mpc-lib-stark-shell-code > code.unselectable {
   color: #6d8a88;
 }
+.mpc-lib-stark-img-full-width {
+  text-align: center;
+}
+.mpc-lib-stark-img-full-width > img {
+  width: 780px;
+  max-width: 100%;
+}
 .mpc-lib-stark-def-table > .pure-table {
   border: 0 none transparent;
 }
