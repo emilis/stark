@@ -77,6 +77,10 @@ div#top( class= [ CLASSNAME, "full-width" ])
             margin-right    0.5 * $logoHeight
             margin-bottom   $lineHeight
 
+            &:last-child
+
+                margin-right    0
+
             > p
 
                 margin-bottom   0
