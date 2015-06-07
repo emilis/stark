@@ -19,6 +19,7 @@ pages:
         -   overview
     -
         -   reference
+        -   commands
         -   directories
         -   files
         -   parts-and-vars

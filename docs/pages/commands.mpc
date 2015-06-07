@@ -1,0 +1,45 @@
+--- requirements --------------------------------------------------------------
+
+config
+DefTable:           stark/def-table
+
+--- yaml ----------------------------------------------------------------------
+
+id:                 commands
+title:              Commands
+
+--- jade ----------------------------------------------------------------------
+
+p
+    | You can get a full documentation of command line options by running 
+    code stark
+    |  without options or 
+    code stark -h
+    | .
+
+p
+    | The general structure is: 
+    code stark COMMAND [OPTIONS]
+    | .
+
+p Commands:
+
+!= DefTable({ prefix: id, content: cmdTable })
+
+--- cmdTable ---
+
+| build         |   Compile output into build/
+| docs          |   Start a web server with the documentation.
+| new PATH      |   Create an example site at PATH.
+| serve         |   Compile into build/ and start a web server.
+| watch         |   Compile and start automatic recompile process.
+| watch-server  |   Compile, start "watch" process and a web server.
+
+--- jade ---
+
+p
+    | I recommend using 
+    code stark watch-server
+    |   for development and 
+    code stark build
+    |   for automated builds.
