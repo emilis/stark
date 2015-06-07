@@ -7,14 +7,14 @@
         <meta property="og:image" content="/static/logo.png">
     
     <title>Stark</title>
-    <link rel="stylesheet" href="static/style.css?iamrlqzc">
-    <script async="async" defer="defer" src="static/script.js?iamrlqzc"></script>
+    <link rel="stylesheet" href="static/style.css?iamt15el">
+    <script async="async" defer="defer" src="static/script.js?iamt15el"></script>
     <style type="text/css">
         
     </style>
 </head>
 <body>
-    <div class="mpc-lib-emilis-with-hide-menu"><nav class="menu"><div class="mpc-lib-stark-menu"><ul><li><a href="#main"><b>STARK(»)</b></a></li><li><a href="#quickstark">Quick Start</a></li><li><a href="#overview">Overview</a></li></ul><ul><li><a href="#reference"><b>Reference</b></a></li><li><a href="#directories">Directories</a></li><li><a href="#files">Files</a></li><li><a href="#parts">Component Parts</a></li></ul><ul><li><a href="#other"><b>Other</b></a></li><li><a href="#contributing">Contributing</a></li></ul></div></nav><main id="main" class="mpc-lib-stark-main-content"><div class="content"><div id="top" class="mpc-pages-stark full-width"><h1 id="main-title"><img src="static/logo.png" alt="Stark"/>A <strong>straightforward</strong> way to build<br>single-page apps and static websites</h1><div class="three-features"><div><h3> Expressive</h3><p>  <a target="_blank" href="https://en.wikipedia.org/wiki/YAML">Yaml</a>, <a target="_blank" href="http://jade-lang.com/">Jade</a>, <a target="_blank" href="http://learnboost.github.io/stylus/">Stylus</a>  used by default. You can even use <a target="_blank" href="http://livescript.net/">LiveScript</a>  if you want.</p></div><div><h3> Simple</h3><p>  Everything is a multi-part component: pages, widgets, themes, libraries, configuration. It simply works.</p></div><div><h3> Plugged-in</h3><p>  Stark strives to reuse what exists. <a target="_blank" href="http://facebook.github.io/react/">React</a>  and <a target="_blank" href="http://bower.io/">Bower</a>  components work today. Expect more in the future.</p></div></div></div><h3 id="quickstark">Quick Start</h3><p>Run this in your terminal:</p><pre class="mpc-lib-stark-shell-code"><code class="unselectable">~$ </code><code>sudo npm install -g stark</code>
+    <div class="mpc-lib-emilis-with-hide-menu"><nav class="menu"><div class="mpc-lib-stark-menu"><ul><li><a href="#main"><b>STARK(»)</b></a></li><li><a href="#quickstark">Quick Start</a></li><li><a href="#overview">Overview</a></li></ul><ul><li><a href="#reference"><b>Reference</b></a></li><li><a href="#commands">Commands</a></li><li><a href="#directories">Directories</a></li><li><a href="#files">Files</a></li><li><a href="#parts">Component Parts</a></li></ul><ul><li><a href="#other"><b>Other</b></a></li><li><a href="#contributing">Contributing</a></li></ul></div></nav><main id="main" class="mpc-lib-stark-main-content"><div class="content"><div id="top" class="mpc-pages-stark full-width"><h1 id="main-title"><img src="static/logo.png" alt="Stark"/>A <strong>straightforward</strong> way to build<br>single-page apps and static websites</h1><div class="three-features"><div><h3> Expressive</h3><p>  <a target="_blank" href="https://en.wikipedia.org/wiki/YAML">Yaml</a>, <a target="_blank" href="http://jade-lang.com/">Jade</a>, <a target="_blank" href="http://learnboost.github.io/stylus/">Stylus</a>  used by default. You can even use <a target="_blank" href="http://livescript.net/">LiveScript</a>  if you want.</p></div><div><h3> Simple</h3><p>  Everything is a multi-part component: pages, widgets, themes, libraries, configuration. It simply works.</p></div><div><h3> Plugged-in</h3><p>  Stark strives to reuse what exists. <a target="_blank" href="http://facebook.github.io/react/">React</a>  and <a target="_blank" href="http://bower.io/">Bower</a>  components work today. Expect more in the future.</p></div></div></div><h3 id="quickstark">Quick Start</h3><p>Run this in your terminal:</p><pre class="mpc-lib-stark-shell-code"><code class="unselectable">~$ </code><code>sudo npm install -g stark</code>
 <code class="unselectable">~$ </code><code>stark new yoursite</code>
 <code class="unselectable">~$ </code><code>cd yoursite/</code>
 <code class="unselectable">~/yoursite$ </code><code>stark watch-server</code>
@@ -33,7 +33,14 @@
  
 jquery/dist/jquery
 Widget2:    ./widget2</code></pre><p>Stark builds a single dependency graph from these requirements (starting from index.mpc file) and generates HTML, CSS, JavaScript files for your app or site.</p><p class="full-width mpc-lib-stark-img-full-width"><img src="static/build-from-requirements.png" alt="Stark builds from component requirements."/></p><hr class="full-width"><h2 id="reference">Reference</h2>
-<h3 id="directories">Directories</h3><p>Now lets look through the contents of your site directory:</p>
+<h3 id="commands">Commands</h3><p>You can get a full documentation of command line options by running <code>stark</code> without options or <code>stark -h</code>.</p><p>The general structure is: <code>stark COMMAND [OPTIONS]</code>.</p><p>Commands:</p>
+<div class="break mpc-lib-stark-def-table">
+    <table class="pure-table">
+        <tbody>
+        <tr><td class="tinted">build</td><td class="">Compile output into build/</td></tr><tr><td class="tinted">docs</td><td class="">Start a web server with the documentation.</td></tr><tr><td class="tinted">new PATH</td><td class="">Create an example site at PATH.</td></tr><tr><td class="tinted">serve</td><td class="">Compile into build/ and start a web server.</td></tr><tr><td class="tinted">watch</td><td class="">Compile and start automatic recompile process.</td></tr><tr><td class="tinted">watch-server</td><td class="">Compile, start "watch" process and a web server.</td></tr>
+        </tbody>
+    </table>
+</div><p>I recommend using <code>stark watch-server</code>  for development and <code>stark build</code>  for automated builds.</p><h3 id="directories">Directories</h3><p>Now lets look through the contents of your site directory:</p>
 <div class="break mpc-lib-stark-def-table">
     <table class="pure-table">
         <tbody>
@@ -71,10 +78,10 @@ Widget2:    ./widget2</code></pre><p>Stark builds a single dependency graph from
 </li>
 <li><p>Please keep your pull requests small and make sure they merge easily with the master branch before submitting.</p>
 </li>
-<li><p>Please send any other feedback to my email: <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#101;&#109;&#105;&#108;&#x69;&#115;&#46;&#x64;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;">&#101;&#109;&#105;&#108;&#x69;&#115;&#46;&#x64;&#64;&#103;&#109;&#x61;&#x69;&#108;&#46;&#x63;&#111;&#x6d;</a>. It is most welcome.</p>
+<li><p>Please send any other feedback to my email: <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x65;&#109;&#105;&#x6c;&#105;&#x73;&#x2e;&#100;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#109;&#105;&#x6c;&#105;&#x73;&#x2e;&#100;&#64;&#x67;&#x6d;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>. It is most welcome.</p>
 </li>
 </ul>
-</div><div class="mpc-lib-stark-footer-spacer"></div><footer class="mpc-lib-stark-footer"><ul><li><a href="#main"><b>STARK(»)</b></a></li><li><a href="#quickstark">Quick Start</a></li><li><a href="#overview">Overview</a></li></ul><ul><li><a href="#reference"><b>Reference</b></a></li><li><a href="#directories">Directories</a></li><li><a href="#files">Files</a></li><li><a href="#parts">Component Parts</a></li></ul><ul><li><a href="#other"><b>Other</b></a></li><li><a href="#contributing">Contributing</a></li></ul></footer></main></div>
+</div><div class="mpc-lib-stark-footer-spacer"></div><footer class="mpc-lib-stark-footer"><ul><li><a href="#main"><b>STARK(»)</b></a></li><li><a href="#quickstark">Quick Start</a></li><li><a href="#overview">Overview</a></li></ul><ul><li><a href="#reference"><b>Reference</b></a></li><li><a href="#commands">Commands</a></li><li><a href="#directories">Directories</a></li><li><a href="#files">Files</a></li><li><a href="#parts">Component Parts</a></li></ul><ul><li><a href="#other"><b>Other</b></a></li><li><a href="#contributing">Contributing</a></li></ul></footer></main></div>
 
 
     <script>
