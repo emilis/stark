@@ -30,38 +30,27 @@ ul
 
 h4 How Multi-Part Components work
 
-p Stark treats multiple files with the same basename but different extensions as parts of the same component. Therefore:
+ul
+    li Stark treats multiple files with the same basename but different extensions as parts of the same component.
+    li There is also a special file format (*.mpc) for having all parts in the same file.
+    li You can freely combine *.mpc and other files.
 
-pre: code
-    | widget.html + widget.css + widget.js
-    | → { name: "widget", parts: { html: "...", css: "...", js: "..." }}
-
-p There is also a special file format for having all parts in the same file, e.g:
-
-pre: code
-    | widget.mpc
-    | → { name: "widget", parts: { html: "...", css: "...", js: "..." }}
-
-p You can also combine `*.mpc` and other files:
-
-pre: code
-    | widget.mpc + widget.txt
-    | → { name: "widget", parts: { html: "...", css: "...", js: "...", txt: "..." }}
+!=  imgFullWidth({ src: "static/mpc-from-files.png", alt: "Components from files with the same extension" })
 
 p MPC file contents look like this:
 
 pre: code
     | --- html ---
     | 
-    | ...
+    | &lt;!-- Note: empty lines between part content and header are mandatory. -->
     | 
     | --- css ---
     | 
-    | ...
+    | /* You can add as many minuses at the end of header as you like: */
     | 
-    | --- js ---
+    | --- js --------------------------------------------------------
     | 
-    | ...
+    | /// Tip: use comments to further structure your code. ---------
 
 p Components can depend on each other. This is expressed in their requirement part:
 
@@ -73,3 +62,4 @@ pre: code
 
 p Stark builds a single dependency graph from these requirements (starting from index.mpc file) and generates HTML, CSS, JavaScript files for your app or site.
 
+!= imgFullWidth({ src: "static/build-from-requirements.png", alt: "Stark builds from component requirements." })
