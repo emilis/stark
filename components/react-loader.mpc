@@ -1,0 +1,42 @@
+--- exports -------------------------------------------------------------------
+
+renderComponent
+
+--- yaml ----------------------------------------------------------------------
+
+rendered:               {}
+props:                  {}
+
+--- jade ----------------------------------------------------------------------
+
+div(
+    class=              CLASSNAME
+    data-component=     name
+    data-props=         JSON.stringify( props )
+)
+    !=  Component( props )
+
+--- livescript ----------------------------------------------------------------
+
+!function render-component Component, name
+
+    if !rendered[name]
+
+        rendered[name] =    true
+
+        Array.prototype.slice.call do
+            document.get-elements-by-class-name CLASSNAME
+
+        .filter ( el )->
+
+            name == el.get-attribute 'data-component'
+
+        .for-each ( el )!->
+
+            props =     JSON.parse el.get-attribute 'data-props'
+
+            React.render do
+                React.create-element do
+                    Component._react-class
+                    props
+                el

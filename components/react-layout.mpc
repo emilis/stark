@@ -1,0 +1,60 @@
+--- exports -------------------------------------------------------------------
+
+init
+
+--- yaml ----------------------------------------------------------------------
+
+title:                  Untitled document
+charset:                utf8
+language:               en
+props:                  {}
+
+--- jade ----------------------------------------------------------------------
+
+doctype html
+html( lang= page.language || language )
+    head
+
+        title=      page.title || title
+        meta( charset= page.charset || charset )
+
+        if page.stylesheets && page.stylesheets.length
+            each url in page.stylesheets
+                link( rel= "stylesheet", href= url )
+
+        link( rel= "stylesheet", href= "/static/style.css" )
+
+    body
+
+        div( 
+            id=                 CLASSNAME
+            data-page-props=    JSON.stringify( page.props || props )
+        )
+            !=  content
+
+        if page.scripts && page.scripts.length
+            each url in page.scripts
+                script( src= url )
+
+        script( src= "/static/script.js" )
+
+        if page.js || page.ls || page.livescript
+            script
+                !=  page.jsModule
+
+        script
+            != 'window.Modules["' + PATH + '"].init(window.Modules["' + page.PATH + '"]);'
+
+--- livescript ----------------------------------------------------------------
+
+function init page
+
+    container =         document.get-element-by-id CLASSNAME
+    props =             JSON.parse container.get-attribute 'data-page-props'
+
+    React.render do
+        React.create-element do
+            page._react-class
+            props
+        container
+
