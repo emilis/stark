@@ -28,7 +28,7 @@ html( lang= page.language || language )
 
         script( src= "/static/script.js" )
 
-        if page.js || page.ls || page.livescript
+        if page.js || page.ls || page.livescript || page["jade-react"]
             script
                 !=  page.jsModule
 
