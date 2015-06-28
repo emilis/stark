@@ -28,6 +28,10 @@ html( lang= page.language || language )
 
         link( rel= "stylesheet", href= "/static/style.css" )
 
+        if page.css
+            style( type= "text/css" )
+                != page.css
+
     body
 
         div( 
