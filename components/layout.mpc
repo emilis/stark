@@ -8,9 +8,15 @@ language:               en
 
 doctype html
 html( lang= page.language || language )
+
     head
+
         title=      page.title || title
         meta( charset= page.charset || charset )
+
+        if page.metaTags && page.metaTags.length
+            each attributes in page.metaTags
+                meta&attributes( attributes )
 
         if page.stylesheets && page.stylesheets.length
             each url in page.stylesheets
