@@ -4,6 +4,7 @@ var fs =                require( "fs" );
 var mkdirp =            require( "mkdirp" );
 var ncp =               require( "ncp" );
 var path =              require( "path" );
+var Promise =           require( "bluebird" );
 var rimraf =            require( "rimraf" );
 var YAML =              require( "yamljs" );
 
@@ -30,7 +31,6 @@ function compileSite( src, dest ){
 
     src =               path.resolve( src );
     dest =              path.resolve( dest );
-
 
     /// Make an empty build directory:
     var cwd =           path.resolve( process.cwd() );
@@ -117,22 +117,22 @@ function compileCss( src, indexName, fileName, config, getSiteComponent ){
         parts:          cssCompiler.partNames,
     };
 
-    cssCompiler.compileComponents(
-        config,
-        mpc.parseComponent( indexName, mpcOptions )
-            .filter( isNotComponent( indexName ))
-            .map( getSiteComponent ),
-        saveCss
-    );
+    return Promise
+        .resolve( mpc.parseComponent( indexName, mpcOptions ))
+        .filter( isNotComponent( indexName ))
+        .map( getSiteComponent )
+        .then( function( siteComponents ){
+            
+            return cssCompiler.compileComponents( config, siteComponents )
+        })
+        .then( function( content ){
 
-    function saveCss( err, content ){
+            return fs.writeFile( fileName, content );
 
-        if ( err ){
-            console.error( "stark.compileCss error:", err );
-        } else {
-            fs.writeFile( fileName, content );
-        }
-    }///
+        }).catch( function( err ){
+            
+            console.error( "start.compileCss error:", err );
+        });
 }///
 
 
