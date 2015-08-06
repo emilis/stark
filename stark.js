@@ -171,7 +171,9 @@ function compilePages( src, indexName, pageDir, dest, config, getSiteComponent )
     }
     components =            components.map( getSiteComponent );
 
-    pageCompiler.compileComponents( config, components ).forEach( savePage );
+    return pageCompiler
+        .compileComponents( config, components )
+        .map( savePage );
             
     function savePage( page ){
 
@@ -179,7 +181,7 @@ function compilePages( src, indexName, pageDir, dest, config, getSiteComponent )
         var dirName =       path.dirname( fileName );
 
         mkdirp.sync( dirName );
-        fs.writeFile( dest + page.permalink, page.fullContent );
+        return fs.writeFile( dest + page.permalink, page.fullContent );
     }///
 }///
 
