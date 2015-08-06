@@ -24,9 +24,9 @@ html( lang= page.language || language )
 
         link( rel= "stylesheet", href= "/static/style.css" )
 
-        if page.css
+        if  page.cssCode
             style( type= "text/css" )
-                != page.css
+                !=  page.cssCode
 
     body
 
