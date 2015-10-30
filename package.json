@@ -7,6 +7,7 @@
     "name": "Emilis Dambauskas",
     "email": "emilis.d@gmail.com"
   },
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/emilis/stark/issues"
   },
@@ -33,8 +34,9 @@
     "mpc": "^0.3.2",
     "ncp": "~1.0.0",
     "node-static": "~0.7.6",
-    "react": "~0.13.0",
-    "react-jade": "git://github.com/emilis/react-jade",
+    "react": "~0.14.0",
+    "react-dom": "~0.14.0",
+    "react-jade": "emilis/react-jade#093c53f55719a29a17d48b69284bea4c45cf03f4",
     "rimraf": "^2.2.8",
     "stylus": "^0.49.2",
     "yamljs": "~0.1.5",
