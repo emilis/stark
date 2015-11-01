@@ -31,7 +31,7 @@ For more info **[go to Stark website »][docs]**.
 
 ##  Copyright and License
 
-Copyright 2014 Emilis Dambauskas <emilis.d@gmail.com>.
+Copyright 2014,2015 Emilis Dambauskas <emilis.d@gmail.com>.
 
 This is free software, and you are welcome to redistribute it under certain conditions; see LICENSE.txt for details.
 
